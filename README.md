@@ -18,15 +18,20 @@ We can use the admin page of the site to update Flit "in the back".
     - Car.objects.filter(make=Audi)
 
 
-** django shell **
+**django shell**
 $ python3 manage.py shell
 
-** create superuser **
+**create superuser**
 $ python3 manage.py createsuperuser
 
-** query all (returns a QuerySet object) **
-
+**query all (returns a QuerySet object)**
 {table-name}.objects.all()
+
+**Restrict access to a view for no-logged in users**
+add the parent-class `LoginRequiredMixin` to the view classes.
+
+**Use signals to trigger routines when a specific event takes place**
+
 
 
 #### Problems and solutions
