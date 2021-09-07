@@ -3,7 +3,8 @@ from django.db.models.signals import post_save  # listens just before we commit 
 from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
-    pass 
+    is_organisor = models.BooleanField(default=True) 
+    is_agent = models.BooleanField(default=False) 
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -15,7 +16,10 @@ class Lead(models.Model):
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     age = models.IntegerField(default=0)
-    agent = models.ForeignKey("Agent", on_delete=models.CASCADE)
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)                # because the agent can be optional, we have to add this field as a way to filter the leads via the User profile
+    agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
+    category = models.ForeignKey("Category", related_name="leads", blank=True, null=True, on_delete=models.SET_NULL)
+
 
     #SOURCE_CHOICES = (
     #    ('YouTube', 'YouTube'),
@@ -36,12 +40,18 @@ class Lead(models.Model):
 
 class Agent(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    # 'organisation' refers to the user that is logged in
+    # 'organisation' refers to the user that is logged in/the organisor
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)      # if the user is deleted, the agent will be as well. 
-
-
     def __str__(self):
         return self.user.email
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=30)     # New, Contacted, Unconverted, Converted.
+    organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE) 
+
+    def __str__(self):
+        return self.name
 
         
 def post_user_created_signal(sender, instance, created, **kwargs):
@@ -50,3 +60,5 @@ def post_user_created_signal(sender, instance, created, **kwargs):
 
 post_save.connect(post_user_created_signal, sender=User)
       
+
+    
