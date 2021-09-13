@@ -6,4 +6,4 @@ export PYTHONPATH=:"${PYTHONPATH}:/Users/Rafa/opt/anaconda3/envs/django/bin"
 
 python3 manage.py migrate 
 
-gunicorn --worker-tmp-dir /dev/shm djcrm.wsgi:application
+gunicorn --worker-tmp-dir /dev/shm djcrm.application
