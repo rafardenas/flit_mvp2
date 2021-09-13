@@ -47,8 +47,30 @@ Use case: Having 2 tables A and B, A has a Foreign Key that references to a colu
     - `qs = self.get_object().leads.all()`
     - 'leads' being the `related_name` in the Fk column of table A
     
+**Requirements file in the correct format (w/out path)**
+$ `pip list --format=freeze > requirements.txt`
+
+See more [here](https://stackoverflow.com/questions/62885911/pip-freeze-creates-some-weird-path-instead-of-the-package-version)
+
+**Not found external django app**
+
+Make sure the PYTHONPATH contains the directory where this external app is installed
+e.g. `'crispy_forms' not found`
+1. run `$pip show django-crispy-forms`
+2. add the location to the PYTHONPATH as follows:
+    `sys.path.append("{location}")`
 
 #### Problems and solutions
 
 [Changes in schema not detected by django](https://stackoverflow.com/questions/25958708/django-1-7-no-migrations-to-apply-when-run-migrate-after-makemigrations)
 
+
+
+**SECRET_KEY environment variable**
+
+$ export READ_DOT_ENV_FILE=True
+
+**Psycopg2 module not found**
+$ PYTHONPATH:
+
+`['', '/Users/Rafa/opt/anaconda3/envs/django/bin', '/Users/Rafa/opt/anaconda3/envs/django/lib/python39.zip', '/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9', '/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9/lib-dynload', '/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9/site-packages', '/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9/site-packages/psycopg2-2.9.1-py3.9-macosx-10.9-x86_64.egg']`

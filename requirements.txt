@@ -1,7 +1,16 @@
-asgiref @ file:///tmp/build/80754af9/asgiref_1625643473416/work
+asgiref==3.4.1
 certifi==2021.5.30
+crispy-tailwind==0.5.0
 Django==3.2.5
-psycopg2 @ file:///opt/concourse/worker/volumes/live/7541fe58-2a45-4073-5d69-313e733fc729/volume/psycopg2_1612298592535/work
-pytz @ file:///tmp/build/80754af9/pytz_1612215392582/work
-sqlparse @ file:///tmp/build/80754af9/sqlparse_1602184451250/work
-typing-extensions @ file:///tmp/build/80754af9/typing_extensions_1624965014186/work
+django-crispy-forms==1.12.0
+django-environ==0.6.0
+gunicorn==20.1.0
+pip==21.2.4
+psycopg2==2.8.6
+psycopg2-binary==2.9.1
+pytz==2021.1
+setuptools==52.0.0.post20210125
+sqlparse==0.4.1
+typing-extensions==3.10.0.0
+wheel==0.37.0
+whitenoise==5.3.0
