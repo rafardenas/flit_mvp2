@@ -1,8 +1,8 @@
 python manage.py collectstatic --no-input
 
-python manage.py runserver 
-
+DJANGO_SETTINGS_MODULE=djcrm.settings 
 export DJANGO_SETTINGS_MODULE=$DJANGO_SETTINGS_MODULE
-export PYTHONPATH=$DJANGODIR:$PYTHONPATH
+
+python3 manage.py migrate 
 
 gunicorn --worker-tmp-dir /dev/shm djcrm.wsgi
