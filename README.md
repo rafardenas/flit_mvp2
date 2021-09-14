@@ -75,5 +75,6 @@ $ PYTHONPATH:
 
 `['', '/Users/Rafa/opt/anaconda3/envs/django/bin', '/Users/Rafa/opt/anaconda3/envs/django/lib/python39.zip', '/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9', '/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9/lib-dynload', '/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9/site-packages', '/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9/site-packages/psycopg2-2.9.1-py3.9-macosx-10.9-x86_64.egg']`
 
-*Version*
-psycopg2==2.8.6
+**One liner to get PYTHONPATH in terminal**
+
+python -c "import sys; print('\n'.join(sys.path))"
