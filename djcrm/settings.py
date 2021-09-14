@@ -92,11 +92,12 @@ WSGI_APPLICATION = 'djcrm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         #'NAME': str(BASE_DIR / 'db.sqlite3'),
-        'NAME': env("DB_NAME"),
+        'NAME': 'flitdb_1',
         'USER': env("DB_USER"),
         'HOST': env("DB_HOST"),
         'PASSWORD': env("DB_PASSWORD"),
