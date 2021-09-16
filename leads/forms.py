@@ -1,25 +1,34 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from .models import Lead, Agent
+from .models import Viajes, Agent
+from bootstrap_datepicker_plus import DatePickerInput
 
 # Return the User model that is active in this project.
 User = get_user_model()
 
 class LeadModelForm(forms.ModelForm):
+    f_salida = forms.DateField(label='Fecha de Salida') 
+    f_llegada = forms.DateField(label='Fecha de Llegada') 
     class Meta:
-        model = Lead
-        fields = (
-            'first_name',
-            'last_name',
-            'age',
-            'agent',
-        )
+        model = Viajes
+        fields = [
+            'origen',
+            'destino',
+            'f_salida',
+            'f_llegada',
+            'tipo_embarque',
+            'mercancia',
+            'cantidad',
+            'cantidad_tipo',
+        ]
 
-class LeadForm(forms.Form):
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-    age = forms.IntegerField(min_value=0)
+
+
+#class LeadForm(forms.Form):
+#    first_name = forms.CharField()
+#    last_name = forms.CharField()
+#    age = forms.IntegerField(min_value=0)
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
@@ -42,7 +51,7 @@ class AssignAgentForm(forms.Form):
 
 class LeadCategoryUpdateForm(forms.ModelForm):
     class Meta:
-        model = Lead
+        model = Viajes
         fields = (
             'category',
         )

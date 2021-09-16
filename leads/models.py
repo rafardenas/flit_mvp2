@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.signals import post_save  # listens just before we commit to the database
 from django.contrib.auth.models import AbstractUser
+from datetime import date
 
 class User(AbstractUser):
     is_organisor = models.BooleanField(default=True) 
@@ -12,10 +13,30 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username 
 
-class Lead(models.Model):
-    first_name = models.CharField(max_length=20)
-    last_name = models.CharField(max_length=20)
-    age = models.IntegerField(default=0)
+class Viajes(models.Model):
+    TIPO_EMBARQUE = (
+        ('Caja Seca', 'Caja Seca'),
+        ('Tolva', 'Tolva'),
+        ('Refrigerado', 'Refrigerado'),
+    )
+
+    TIPO_CANTIDAD = (
+        ('Toneladas', 'Toneladas'),
+        ('Tarimas', 'Tarimas'),
+        ('Otro', 'Otro'),
+    )
+
+    origen = models.CharField(max_length=20)
+    destino = models.CharField(max_length=20)
+    f_salida = models.DateField(default=date.today)
+    f_llegada = models.DateField(default=date.today)
+    tipo_embarque = models.CharField(default=None, choices=TIPO_EMBARQUE, max_length=30)
+    mercancia = models.CharField(max_length=20)
+    cantidad = models.IntegerField(default=0)
+    cantidad_tipo = models.CharField(default=None, choices=TIPO_CANTIDAD, max_length=30)
+
+
+
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)                # because the agent can be optional, we have to add this field as a way to filter the leads via the User profile
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
     category = models.ForeignKey("Category", related_name="leads", blank=True, null=True, on_delete=models.SET_NULL)

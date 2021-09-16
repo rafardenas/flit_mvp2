@@ -45,11 +45,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    
 
     # Third party apps
 
     "crispy_forms",
     "crispy_tailwind",
+    'bootstrap_datepicker_plus',
 
     # local apps
     'leads',
@@ -159,6 +161,7 @@ LOGIN_REDIRECT_URL = "/leads"
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = "/"
 
+DATETIME_FORMAT="%d/%m/%Y"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
 CRISPY_TEMPLATE_PACK = 'tailwind'
