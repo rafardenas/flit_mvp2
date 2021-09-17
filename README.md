@@ -8,6 +8,10 @@ We can use the admin page of the site to update Flit "in the back".
 
 ### Resources, problems, solutions
 
+#### Styles
+
+- Progress bar: https://www.creative-tim.com/learning-lab/tailwind-starter-kit/documentation/css/progressbars
+
 #### Resources
 
 [Make Queries](https://docs.djangoproject.com/en/3.2/topics/db/queries/)
@@ -78,3 +82,5 @@ $ PYTHONPATH:
 **One liner to get PYTHONPATH in terminal**
 
 python -c "import sys; print('\n'.join(sys.path))"
+
+

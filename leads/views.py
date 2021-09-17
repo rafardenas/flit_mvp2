@@ -33,17 +33,22 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
 
     def get_queryset(self):
         # get the current user
-        user = self.request.user      
+        user = self.request.user   
+        print(user.userprofile)   
         # initial queryset for the entire organisation (i.e. the agent or the organisor)
         if user.is_organisor:
             #query all the leads for certain organisation from the *organisation*
             queryset = Viajes.objects.filter(organisation=user.userprofile, 
                     agent__isnull=False)      #if the user is organisor, it will have a userprofile, otherwise that user is an agent.
+            queryset = Viajes.objects.filter(organisation=user.userprofile)
+            print(queryset.first())
+
         else:
             #query all the leads for certain organisation from the *agent* (note how the agent and the organisation are linked: a user can be an agent, and an agent has an organisation)
             queryset= Viajes.objects.filter(organisation=user.agent.organisation)
             #filter for the agent that is logged in. (agent__user is equivalent to: `agent.user` in flask)
             queryset = queryset.filter(agent__user = user   )
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -67,7 +72,7 @@ def lead_list(request):
 class LeadDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "leads/lead_detail.html"
     queryset = Viajes.objects.all()
-    context_object_name = 'lead'
+    context_object_name = 'viaje'
 
     def get_queryset(self):
         user = self.request.user      

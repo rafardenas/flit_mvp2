@@ -2,14 +2,15 @@ from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
 from .models import Viajes, Agent
-from bootstrap_datepicker_plus import DatePickerInput
+from datetime import date
+
 
 # Return the User model that is active in this project.
 User = get_user_model()
 
 class LeadModelForm(forms.ModelForm):
-    f_salida = forms.DateField(label='Fecha de Salida') 
-    f_llegada = forms.DateField(label='Fecha de Llegada') 
+    f_salida = forms.DateField(label='Fecha de Salida', initial= date.strftime(date.today(), '%d/%m/%y'), input_formats=['%d/%m/%y']) 
+    f_llegada = forms.DateField(label='Fecha de Llegada', initial= date.strftime(date.today(), '%d/%m/%y'), input_formats=['%d/%m/%y'])
     class Meta:
         model = Viajes
         fields = [

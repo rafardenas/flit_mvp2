@@ -34,8 +34,7 @@ class Viajes(models.Model):
     mercancia = models.CharField(max_length=20)
     cantidad = models.IntegerField(default=0)
     cantidad_tipo = models.CharField(default=None, choices=TIPO_CANTIDAD, max_length=30)
-
-
+    status = models.CharField(default='En ruta', max_length=30)
 
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)                # because the agent can be optional, we have to add this field as a way to filter the leads via the User profile
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
@@ -56,7 +55,7 @@ class Viajes(models.Model):
     #special_files = models.FileField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.first_name} {self.last_name}"
+        return f"{self.origen} {self.destino}"
 
 
 class Agent(models.Model):
