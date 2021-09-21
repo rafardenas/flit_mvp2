@@ -1,9 +1,9 @@
 <div class="progressbar-wrapper">
     <ul class="progressbar">
-        <li class="active"><a href="#">Cotizacion aceptada (Ver detalle)</a></li>
+        <li class="active"><a href="{% url 'leads:inicio-viaje' viaje.pk %}">Inicio del flete (Ver detalle)</a></li>
         <li class="active">En camino a recolección</li>
-        <li class="active"><a href="#">Recolección completada (Ver detalle) </a></li>
-        <li>En camino</li>
+        <li class="active"><a href="#">Recolección completada (Ver más) </a></li>
+        <li>En ruta</li>
         <li>Descargando</li>
         <li><a href="#">Completado (Ver prueba de entrega)</a></li>
     </ul>

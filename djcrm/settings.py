@@ -22,6 +22,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 
 
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -52,6 +53,8 @@ INSTALLED_APPS = [
     "crispy_forms",
     "crispy_tailwind",
     'bootstrap_datepicker_plus',
+    'storages',
+
 
     # local apps
     'leads',
@@ -165,6 +168,19 @@ DATETIME_FORMAT="%d/%m/%Y"
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'tailwind'
 CRISPY_TEMPLATE_PACK = 'tailwind'
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_S3_ACCESS_KEY_ID = "AKIAWRJ6EG2DKZVKZBUS"
+AWS_S3_SECRET_ACCESS_KEY = "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"
+AWS_STORAGE_BUCKET_NAME = "flit-documents-1"
+#AWS_S3_ACCESS_KEY_ID = env("AWS_S3_ACCESS_KEY_ID")
+#AWS_S3_SECRET_ACCESS_KEY = env('AWS_S3_SECRET_ACCESS_KEY')
+#AWS_STORAGE_BUCKET_NAME = env("AWS_STORAGE_BUCKET_NAME")
+AWS_QUERYSTRING_AUTH = False
+AWS_S3_FILE_OVERWRITE = False
+
+
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

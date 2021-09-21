@@ -3,7 +3,7 @@
 
 {% block content %}
     <section class="text-gray-600 body-font overflow-hidden">
-    <div class="container px-5 py-24 mx-auto">
+    <div class="container px-5 py-10 mx-auto">
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
             <div class="lg:w-1/2 w-full lg:pr-8 lg:py-6 mb-6 lg:mb-0">
                 <div>
@@ -77,8 +77,14 @@
     <div class="flex mb-4">
         {% include 'p_bar2.html' %}
     </div>
+
+    <div class="container px-5 py-0 mx-auto">
+        <div class="lg:w-4/5 mx-auto flex flex-wrap">
     <div class="flex py-4" style="align-items: center; display: flex;">
         <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Ayuda</button></a>
+        <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded ">Cancelar Viaje</button></a>
+    </div>
+    </div>
     </div>
     
 

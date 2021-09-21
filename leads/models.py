@@ -55,7 +55,21 @@ class Viajes(models.Model):
     #special_files = models.FileField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.origen} {self.destino}"
+        return f"{self.origen}  - {self.destino}"
+
+class Imagenes_viajes(models.Model):
+    CATEGORIA = (
+        ('recoleccion', 'Recoleccion'),
+        ('Entrega', 'Entrega'),
+        ('Otro', 'Otro'),
+    )
+    categoria  = models.CharField(default=None, choices=CATEGORIA, max_length=30)
+    imagen = models.ImageField(default='default.jpg', upload_to='imagenes-fletes/')
+    flete = models.ForeignKey(Viajes, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.flete}  - {self.categoria}"
+ 
 
 
 class Agent(models.Model):

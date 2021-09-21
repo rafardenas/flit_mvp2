@@ -14,9 +14,12 @@
     text-align: center;
     text-transform: uppercase;
     color: #7d7d7d;
-    
-
 }
+
+.progressbar li { 
+  margin-bottom: 5%;  
+}
+
 
 
 .progressbar li:before {
@@ -80,10 +83,10 @@
 
 
 .progressbar li:hover {
-  color: rgb(22, 122, 245);
+  color: rgb(52, 136, 238);
 }
 
 
 .progressbar li.active:hover {
-  color: rgb(22, 122, 245);
+  color: rgb(52, 136, 238);
 }

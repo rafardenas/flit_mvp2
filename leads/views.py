@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views import generic
-from .models import Viajes, Agent, Category
+from .models import Viajes, Agent, Category, Imagenes_viajes
 from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm
 from agents.mixins import OrganisorandLoginRequiredMixin
 
@@ -23,9 +23,6 @@ class SignupView(generic.CreateView):
 class LandingPageView(generic.TemplateView):
     template_name = 'landing.html'
 
-
-def landing_page(request):
-    return render(request, 'landing.html')
 
 class LeadListView(LoginRequiredMixin, generic.ListView):
     template_name = "leads/lead_list.html"
@@ -62,13 +59,6 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
         return context
 
 
-def lead_list(request):
-    leads = Viajes.objects.all()
-    context = {
-        "leads": leads  
-    }
-    return render(request, "leads/lead_list.html", context=context)
-
 class LeadDetailView(LoginRequiredMixin, generic.DetailView):
     template_name = "leads/lead_detail.html"
     queryset = Viajes.objects.all()
@@ -83,13 +73,6 @@ class LeadDetailView(LoginRequiredMixin, generic.DetailView):
             queryset = queryset.filter(agent__user == self.request.user)
         return queryset
 
-
-def lead_detail(request, pk):
-    lead = Viajes.objects.get(id=pk)
-    context = {
-        "lead":lead
-    }
-    return render(request, "leads/lead_detail.html", context)
 
 class LeadCreateView(OrganisorandLoginRequiredMixin, generic.CreateView):
     template_name = "leads/lead_create.html"
@@ -112,28 +95,6 @@ class LeadCreateView(OrganisorandLoginRequiredMixin, generic.CreateView):
         return super(LeadCreateView, self).form_valid(form)
 
 
-def lead_create(request):
-    form = LeadModelForm()
-    if request.method == 'POST':
-        form = LeadModelForm(request.POST)
-        if form.is_valid():
-            # abstracts all the code that we'd  normally write to fill and submit a form:
-            ##########
-            #first_name = form.cleaned_data['first_name']
-            #last_name = form.cleaned_data['last_name']
-            #age = form.cleaned_data['age']
-            #agent = form.cleaned_data['agent']
-            #creating a new lead
-            #Viajes.objects.create(first_name=first_name, last_name=last_name, age=age, agent=agent)
-            ##########
-            form.save()
-            return redirect('/leads')
-    context = {
-        "form": form
-    }
-    return render(request, "leads/lead_create.html", context=context)
-
-
 class LeadUpdateView(OrganisorandLoginRequiredMixin, generic.UpdateView):
     template_name = "leads/lead_update.html"
     form_class = LeadModelForm
@@ -146,21 +107,6 @@ class LeadUpdateView(OrganisorandLoginRequiredMixin, generic.UpdateView):
         return reverse("leads:lead-list")
 
 
-def lead_update(request, pk):
-    lead = Viajes.objects.get(id=pk)
-    form = LeadModelForm(instance=lead)           #pass the specific instance of the form we want to update
-    if request.method == "POST":
-        form = LeadModelForm(request.POST, instance=lead)
-        if form.is_valid():
-            form.save() #commit the changes to the db
-            return redirect("/leads")
-    context = {
-        'form':form,
-        'lead':lead
-    }
-    return render(request, "leads/lead_update.html", context=context)
-
-
 class LeadDeleteView(OrganisorandLoginRequiredMixin, generic.DeleteView):
     template_name = "leads/lead_delete.html"
     
@@ -170,12 +116,6 @@ class LeadDeleteView(OrganisorandLoginRequiredMixin, generic.DeleteView):
 
     def get_success_url(self):
         return reverse("leads:lead-list")
-
-
-def lead_delete(request, pk):
-    lead = Viajes.objects.get(id=pk)
-    lead.delete()       #delete the instance from the db
-    return redirect("/leads")
 
 
 class AssignAgentView(OrganisorandLoginRequiredMixin, generic.FormView):
@@ -289,4 +229,12 @@ class LeadCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
         return reverse("leads:lead-detail", kwargs={ "pk": self.get_object().id })
 
 
+class InicioViajeView(LoginRequiredMixin, generic.DetailView):
+    template_name = 'leads/inicio_viaje.html'
+    queryset = Viajes.objects.all()
+    context_object_name = 'viaje'
+    #queryset2 = Imagenes_viajes.objects.filter(categoria='Recoleccion')
+    #context.update({
+    #    'imagen':queryset2
+    #})
 

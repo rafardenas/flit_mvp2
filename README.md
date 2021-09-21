@@ -64,6 +64,10 @@ e.g. `'crispy_forms' not found`
 2. add the location to the PYTHONPATH as follows:
     `sys.path.append("{location}")`
 
+**Find folders used to look for packages**
+
+I'm not sure what are you trying to do, but if you want to know which folders are used to search for modules being imported you should not rely on PYTHONPATH. Use sys.path for that.
+
 #### Problems and solutions
 
 [Changes in schema not detected by django](https://stackoverflow.com/questions/25958708/django-1-7-no-migrations-to-apply-when-run-migrate-after-makemigrations)
