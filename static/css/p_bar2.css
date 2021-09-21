@@ -83,10 +83,10 @@
 
 
 .progressbar li:hover {
-  color: rgb(52, 136, 238);
+  color: #667eea;
 }
 
 
 .progressbar li.active:hover {
-  color: rgb(52, 136, 238);
+  color: #667eea;
 }

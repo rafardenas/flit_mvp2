@@ -26,6 +26,16 @@ class Viajes(models.Model):
         ('Otro', 'Otro'),
     )
 
+    STATUS = (
+        ('0', '0'),
+        ('1', '1'),
+        ('2', '2'),
+        ('3', '3'),
+        ('4', '4'),
+        ('5', '5'),
+        ('6', '6'),
+    )
+
     origen = models.CharField(max_length=20)
     destino = models.CharField(max_length=20)
     f_salida = models.DateField(default=date.today)
@@ -33,8 +43,8 @@ class Viajes(models.Model):
     tipo_embarque = models.CharField(default=None, choices=TIPO_EMBARQUE, max_length=30)
     mercancia = models.CharField(max_length=20)
     cantidad = models.IntegerField(default=0)
-    cantidad_tipo = models.CharField(default=None, choices=TIPO_CANTIDAD, max_length=30)
-    status = models.CharField(default='En ruta', max_length=30)
+    cantidad_tipo = models.CharField(default='Otro', choices=TIPO_CANTIDAD, max_length=30)
+    status = models.CharField(default='0', choices=STATUS, max_length=30)
 
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)                # because the agent can be optional, we have to add this field as a way to filter the leads via the User profile
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
@@ -59,7 +69,7 @@ class Viajes(models.Model):
 
 class Imagenes_viajes(models.Model):
     CATEGORIA = (
-        ('recoleccion', 'Recoleccion'),
+        ('Recoleccion', 'Recoleccion'),
         ('Entrega', 'Entrega'),
         ('Otro', 'Otro'),
     )

@@ -230,11 +230,52 @@ class LeadCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 
 class InicioViajeView(LoginRequiredMixin, generic.DetailView):
-    template_name = 'leads/inicio_viaje.html'
+    template_name = 'leads/recoleccion_completada.html'
     queryset = Viajes.objects.all()
     context_object_name = 'viaje'
+
+    def get_queryset(self):
+        queryset = Viajes.objects.all()
+        print(queryset)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(InicioViajeView, self).get_context_data(**kwargs)
+        queryset2 = Imagenes_viajes.objects.filter(flete=1)
+        print(queryset2.first().imagen.url)
+        context.update({
+                "imagen": queryset2.first()
+            })
+        return context
+
+
+
     #queryset2 = Imagenes_viajes.objects.filter(categoria='Recoleccion')
     #context.update({
     #    'imagen':queryset2
     #})
 
+class FinViajeView(LoginRequiredMixin, generic.DetailView):
+    template_name = 'leads/viaje_completado.html'
+    queryset = Viajes.objects.all()
+    pk = queryset.first().pk
+    context_object_name = 'viaje'
+
+    #def get_queryset(self):
+    #    queryset = Viajes.objects.all()
+    #    print(queryset.first().pk)
+    #    return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(FinViajeView, self).get_context_data(**kwargs)
+        queryset2 = Imagenes_viajes.objects.filter(flete=self.pk)
+        queryset2 = queryset2.filter(categoria='entrega')
+        if queryset2.first() == None:
+            queryset2 = None
+        else:
+            queryset2 = queryset2.first()
+            print(queryset2.first().imagen.url)
+        context.update({
+                "imagen": queryset2
+            })
+        return context

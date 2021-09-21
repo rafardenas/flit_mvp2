@@ -7,9 +7,9 @@
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
             <div class="lg:w-1/2 w-full lg:pr-8 lg:py-6 mb-6 lg:mb-0">
                 <div>
-                    <a class = "text-gray-500 hover:text-blue-500 mb-4" href = "{% url 'leads:lead-list'%}">Regresar a viajes</a>
+                    <a class = "text-gray-500 hover:text-indigo-500 mb-4" href = "{% url 'leads:lead-list'%}">Regresar a viajes</a>
                 </div>
-            <h1 class="text-gray-500 text-3xl title-font font-medium mb-4 mt-4">{{ viaje.origen }} -> {{ viaje.destino }}</h1>
+            <h1 class="text-gray-900 text-3xl title-font font-medium mb-4 mt-4">{{ viaje.origen }} -> {{ viaje.destino }}</h1>
             <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ viaje.age }} </h2>
 
             <!--PROGRESS BAR
@@ -32,7 +32,7 @@
                 </div>
             -->
             <div class="flex mb-4">
-            <a class="flex-grow text-blue-500 border-b-2 border-blue-400 py-2 text-lg px-1">Resumen</a>
+            <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">Resumen</a>
             </div>
 
             <div class="flex border-t border-gray-200 py-2">
@@ -66,12 +66,12 @@
         </div>
         
         <div class="flex lg:w-1/2  justify-center items-center">
-            <img alt="ecommerce" class="lg:w-1/2 w-full h-64 object-cover object-center rounded" src="https://dummyimage.com/400x400">
+            <img alt="ecommerce" class="lg:w-3/5 w-full h-50 object-cover object-center rounded" src="https://flit-documents-1.s3.us-east-2.amazonaws.com/imagenes-fletes/map_mvp1.png">
         </div>
     </div>
 
     <div class="flex mb-4">
-        <a class="flex-grow text-blue-500 border-b-2 border-blue-400 py-2 text-lg px-1 mt-6">Estatus del viaje</a>
+        <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1 mt-6">Estatus del viaje</a>
     </div>
     
     <div class="flex mb-4">
