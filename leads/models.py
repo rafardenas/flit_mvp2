@@ -2,6 +2,7 @@ from django.db import models
 from django.db.models.signals import post_save  # listens just before we commit to the database
 from django.contrib.auth.models import AbstractUser
 from datetime import date
+import os
 
 class User(AbstractUser):
     is_organisor = models.BooleanField(default=True) 
@@ -73,13 +74,25 @@ class Imagenes_viajes(models.Model):
         ('Entrega', 'Entrega'),
         ('Otro', 'Otro'),
     )
+
+    
+    def photopath(self, filename):
+        basefilename, file_extension= os.path.splitext(filename)
+        return 'imagenes-fletes/{basename}-id-{fleteid}{ext}'.format(fleteid= self.flete.pk, basename=self.categoria, ext=file_extension)
+
+
     categoria  = models.CharField(default=None, choices=CATEGORIA, max_length=30)
-    imagen = models.ImageField(default='default.jpg', upload_to='imagenes-fletes/')
     flete = models.ForeignKey(Viajes, on_delete=models.CASCADE)
+    imagen = models.ImageField(default='default.jpg', upload_to=photopath)
 
     def __str__(self):
         return f"{self.flete}  - {self.categoria}"
- 
+
+    #def save(self, *args, **kwargs):
+    #    super(Imagenes_viajes, self).save(*args, **kwargs)
+    #    print(self.imagen.name)
+
+
 
 
 class Agent(models.Model):

@@ -232,21 +232,31 @@ class LeadCategoryUpdateView(LoginRequiredMixin, generic.UpdateView):
 class InicioViajeView(LoginRequiredMixin, generic.DetailView):
     template_name = 'leads/recoleccion_completada.html'
     queryset = Viajes.objects.all()
+    
+    
     context_object_name = 'viaje'
 
     def get_queryset(self):
         queryset = Viajes.objects.all()
-        print(queryset)
+        #print(queryset)
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super(InicioViajeView, self).get_context_data(**kwargs)
-        queryset2 = Imagenes_viajes.objects.filter(flete=1)
-        print(queryset2.first().imagen.url)
+        queryset2 = Imagenes_viajes.objects.filter(flete=self.get_object().pk)
+        queryset2 = queryset2.filter(categoria='Recoleccion')
+        print(queryset2.first())
+        if queryset2.first() == None:
+            queryset2 = None
+        else:
+            queryset2 = queryset2.first()
         context.update({
-                "imagen": queryset2.first()
+                "imagen": queryset2
             })
         return context
+
+
+        
 
 
 
@@ -258,7 +268,6 @@ class InicioViajeView(LoginRequiredMixin, generic.DetailView):
 class FinViajeView(LoginRequiredMixin, generic.DetailView):
     template_name = 'leads/viaje_completado.html'
     queryset = Viajes.objects.all()
-    pk = queryset.first().pk
     context_object_name = 'viaje'
 
     #def get_queryset(self):
@@ -268,13 +277,14 @@ class FinViajeView(LoginRequiredMixin, generic.DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(FinViajeView, self).get_context_data(**kwargs)
-        queryset2 = Imagenes_viajes.objects.filter(flete=self.pk)
+        queryset2 = Imagenes_viajes.objects.filter(flete=self.get_object().pk)
         queryset2 = queryset2.filter(categoria='entrega')
         if queryset2.first() == None:
             queryset2 = None
         else:
             queryset2 = queryset2.first()
             print(queryset2.first().imagen.url)
+
         context.update({
                 "imagen": queryset2
             })
