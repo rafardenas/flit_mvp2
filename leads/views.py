@@ -48,6 +48,20 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
 
         return queryset
 
+    def status_readable(status):
+        dictStatus = {
+            1: "Inicio del flete",
+            2: "En camino a recolección",
+            3: "Recolección completada",
+            4: "En ruta",
+            5: "Descargando",
+            6: "Completado",
+        }
+        status_read = dictStatus[int(status)]
+        return status_read
+
+
+
     def get_context_data(self, **kwargs):
         context = super(LeadListView, self).get_context_data(**kwargs)
         user = self.request.user 

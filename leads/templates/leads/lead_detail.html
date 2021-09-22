@@ -73,11 +73,23 @@
     <div class="flex mb-4">
         <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1 mt-6">Estatus del viaje</a>
     </div>
-    <span class="text-xs" style="opacity: 1;">Status: {{ viaje.status }}</span>
-    
+    <span class="text-xs" style="opacity: 0">Status: </span>
+    <span class="text-xs" style="opacity: 0;" id="demo">{{ viaje.status }}</span>
+    <!-------------------------Progress BAR ------------------>
     <div class="flex mb-4">
-        {% include 'p_bar2.html' %}
+        <div class="progressbar-wrapper">
+            <ul class="progressbar">
+                <li class="" id="1"><a href="#">Inicio del flete (Ver detalle)</a></li>
+                <li class="" id='2'>En camino a recolección</li>
+                <li class="" id='3'><a href="{% url 'leads:inicio-viaje' viaje.pk %}">Recolección completada (Ver más) </a></li>
+                <li class="" id='4'>En ruta</li>
+                <li class="" id='5'>Descargando</li>
+                <li class="" id='6'><a href="{% url 'leads:fin-viaje' viaje.pk %}">Completado (Ver prueba de entrega)</a></li>
+            </ul>
+        </div>  
     </div>
+    <!--------------------------------------------------------->
+
 
     <div class="container px-5 py-0 mx-auto">
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
@@ -93,10 +105,28 @@
     </div>
     </section>
 
-    <script>
-        function myFunction() {
-            document.getElementById("demo").innerHTML = "Paragraph changed.";
-}
-    </script>
+    <!-- <script>
+        var i = 0;
+        var counter = 0;
+
+        while (i <= 4) {
+            if (i <= 2) {
+                var iid = counter.toString();
+                var name = document.getElementById("demo").className;
+                console.log(name);
+                //console.log(iid=="1")
+                //cls = document.getElementById(iid).innerHTML;
+                //console.log(cls);
+            } else {
+                //document.getElementById(i.toString()).className = "noactive";
+                //console.log("noactive:", i)
+                
+            }
+            counter = counter+1;
+            i++;
+        }
+    </script> -->
+
+
 
 {% endblock content %}

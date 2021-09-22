@@ -37,6 +37,7 @@ class Viajes(models.Model):
         ('6', '6'),
     )
 
+
     origen = models.CharField(max_length=20)
     destino = models.CharField(max_length=20)
     f_salida = models.DateField(default=date.today)
@@ -46,6 +47,7 @@ class Viajes(models.Model):
     cantidad = models.IntegerField(default=0)
     cantidad_tipo = models.CharField(default='Otro', choices=TIPO_CANTIDAD, max_length=30)
     status = models.CharField(default='0', choices=STATUS, max_length=30)
+
 
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)                # because the agent can be optional, we have to add this field as a way to filter the leads via the User profile
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)

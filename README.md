@@ -21,6 +21,14 @@ We can use the admin page of the site to update Flit "in the back".
 - Filters (*make is a field in the table*)
     - Car.objects.filter(make=Audi)
 
+[Run queries with psql shell](https://courses.cs.washington.edu/courses/csep544/11au/resources/postgresql-instructions.html#psql)
+    1. Open terminal and run 
+    2. psql -U postgres my_database
+    where my_database is the name of the database
+
+[Basic Queries](https://www.postgresqltutorial.com/postgresql-update/)
+
+
 
 **django shell**
 $ python3 manage.py shell
