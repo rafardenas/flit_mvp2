@@ -73,6 +73,7 @@
     <div class="flex mb-4">
         <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1 mt-6">Estatus del viaje</a>
     </div>
+    <span class="text-xs" style="opacity: 1;">Status: {{ viaje.status }}</span>
     
     <div class="flex mb-4">
         {% include 'p_bar2.html' %}
@@ -91,4 +92,11 @@
     </div>
     </div>
     </section>
+
+    <script>
+        function myFunction() {
+            document.getElementById("demo").innerHTML = "Paragraph changed.";
+}
+    </script>
+
 {% endblock content %}

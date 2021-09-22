@@ -1,10 +1,10 @@
 <div class="progressbar-wrapper">
     <ul class="progressbar">
-        <li class="active"><a href="#">Inicio del flete (Ver detalle)</a></li>
-        <li class="active">En camino a recolección</li>
-        <li class="active"><a href="{% url 'leads:inicio-viaje' viaje.pk %}">Recolección completada (Ver más) </a></li>
-        <li>En ruta</li>
-        <li>Descargando</li>
-        <li><a href="{% url 'leads:fin-viaje' viaje.pk %}">Completado (Ver prueba de entrega)</a></li>
+        <li class="active" id='1'><a href="#">Inicio del flete (Ver detalle)</a></li>
+        <li class="active" id='2'>En camino a recolección</li>
+        <li class="active" id='3'><a href="{% url 'leads:inicio-viaje' viaje.pk %}">Recolección completada (Ver más) </a></li>
+        <li class="unactive" id='4'>En ruta</li>
+        <li class="unactive" id='5'>Descargando</li>
+        <li class="unactive" id='6'><a href="{% url 'leads:fin-viaje' viaje.pk %}">Completado (Ver prueba de entrega)</a></li>
     </ul>
-</div>
+</div>  

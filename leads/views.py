@@ -278,12 +278,11 @@ class FinViajeView(LoginRequiredMixin, generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(FinViajeView, self).get_context_data(**kwargs)
         queryset2 = Imagenes_viajes.objects.filter(flete=self.get_object().pk)
-        queryset2 = queryset2.filter(categoria='entrega')
+        queryset2 = queryset2.filter(categoria='Entrega')
         if queryset2.first() == None:
             queryset2 = None
         else:
             queryset2 = queryset2.first()
-            print(queryset2.first().imagen.url)
 
         context.update({
                 "imagen": queryset2

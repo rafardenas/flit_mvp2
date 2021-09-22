@@ -18,7 +18,7 @@
         <div class="flex flex-wrap -m-4 ">
             <div class="xl:w-1/2 xl:h-1/2 p-4 ">
             <div class="bg-gray-100 p-6 rounded-lg ">
-                {% if imagen != None %}
+                {% if viaje.status == '6' %}
                     <img class="h-40 rounded w-full h-full object-cover object-center mb-6" src="{{ imagen.imagen.url }}" alt="content">
                 {% endif %}
                 <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Prueba de entrega</h3>

@@ -17,7 +17,7 @@ class LeadModelForm(forms.ModelForm):
             'origen',
             'destino',
             'f_salida',
-            'f_llegada',
+            'f_llegada',    
             'tipo_embarque',
             'mercancia',
             'cantidad',
