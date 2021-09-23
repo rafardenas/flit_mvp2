@@ -112,7 +112,17 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-        
+
+
+class Ayuda(models.Model):
+    name = models.CharField(max_length=50)
+    flete_id = models.CharField(max_length=10)
+    metodo_contacto = models.CharField(max_length=30)
+    asunto = models.CharField(max_length=30)
+    mensaje = models.CharField(max_length=150)
+
+
+
 def post_user_created_signal(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)

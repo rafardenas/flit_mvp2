@@ -7,7 +7,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views import generic
 from .models import Viajes, Agent, Category, Imagenes_viajes
-from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm
+from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm, AyudaForm
 from agents.mixins import OrganisorandLoginRequiredMixin
 
 # Create your views here.
@@ -270,24 +270,11 @@ class InicioViajeView(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-        
-
-
-
-    #queryset2 = Imagenes_viajes.objects.filter(categoria='Recoleccion')
-    #context.update({
-    #    'imagen':queryset2
-    #})
 
 class FinViajeView(LoginRequiredMixin, generic.DetailView):
     template_name = 'leads/viaje_completado.html'
     queryset = Viajes.objects.all()
     context_object_name = 'viaje'
-
-    #def get_queryset(self):
-    #    queryset = Viajes.objects.all()
-    #    print(queryset.first().pk)
-    #    return queryset
 
     def get_context_data(self, **kwargs):
         context = super(FinViajeView, self).get_context_data(**kwargs)
@@ -302,3 +289,46 @@ class FinViajeView(LoginRequiredMixin, generic.DetailView):
                 "imagen": queryset2
             })
         return context
+
+
+
+class AyudaView(LoginRequiredMixin, generic.CreateView):
+    template_name = 'leads/ayuda.html'
+    form_class = AyudaForm
+    
+    def get_queryset(self):
+        print(self.get_object())
+        return Viajes.objects.filter(id=self.get_object().id)
+
+    def get_success_url(self):
+        return reverse("leads:lead-list", kwargs={ "pk": self.get_object().id })
+    
+    def get_initial(self):
+        initial = super(AyudaView, self).get_initial()
+        # update initial field defaults with custom set default values:
+        initial['name'] = self.request.user
+        initial['flete_id'] = self.kwargs["pk"]
+        return initial
+
+
+    """
+    def form_valid(self, form):s
+        lead = form.save(commit=False)
+        lead.organisation = self.request.user.userprofile
+        lead.save()
+        
+        # send email
+        send_mail(
+            subject="Se ha creado un nuevo viaje", 
+            message="Entra a Flit para monitorear el progreso",
+            from_email="test@test.com",
+            recipient_list=["test2@test.com"])
+        return super(LeadCreateView, self).form_valid(form)
+    """
+
+class AyudaGralView(LoginRequiredMixin, generic.CreateView):
+    template_name = 'leads/ayuda_gral.html'
+    form_class = AyudaForm
+    
+    def get_success_url(self):
+        return reverse("leads:lead-list")

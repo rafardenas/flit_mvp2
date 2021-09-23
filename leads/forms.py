@@ -1,16 +1,20 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField
-from .models import Viajes, Agent
+from django.db.models import fields
+from django.forms.widgets import NumberInput
+from .models import Viajes, Agent, Ayuda
 from datetime import date
+from django.forms.widgets import NumberInput
 
 
 # Return the User model that is active in this project.
 User = get_user_model()
 
 class LeadModelForm(forms.ModelForm):
-    f_salida = forms.DateField(label='Fecha de Salida', initial= date.strftime(date.today(), '%d/%m/%y'), input_formats=['%d/%m/%y']) 
-    f_llegada = forms.DateField(label='Fecha de Llegada', initial= date.strftime(date.today(), '%d/%m/%y'), input_formats=['%d/%m/%y'])
+    f_salida = forms.DateField(label='Fecha de Salida', initial= date.strftime(date.today(), '%d/%m/%y'),  widget=NumberInput(attrs={'type':'date'})) 
+    f_llegada = forms.DateField(label='Fecha de Llegada', initial= date.strftime(date.today(), '%d/%m/%y'), widget=NumberInput(attrs={'type':'date'}))
+
     class Meta:
         model = Viajes
         fields = [
@@ -57,3 +61,17 @@ class LeadCategoryUpdateForm(forms.ModelForm):
             'category',
         )
         
+class AyudaForm(forms.ModelForm):
+    name = forms.CharField(label="Nombre", initial = "")
+    flete_id = forms.CharField(label="Clave del Flete", initial = "")
+    metodo_contacto = forms.CharField(label="Método preferido de contacto")
+    asunto = forms.CharField(label="Asunto")
+    mensaje = forms.CharField(label="Mensaje")
+    
+
+    class Meta:
+        model = Ayuda
+        fields = '__all__'
+    
+    #def get_initial(self):
+

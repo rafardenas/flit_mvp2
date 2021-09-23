@@ -28,6 +28,13 @@ We can use the admin page of the site to update Flit "in the back".
 
 [Basic Queries](https://www.postgresqltutorial.com/postgresql-update/)
 
+**Set date input format in django.forms**
+    add this attribute to the field:
+    `input_formats=['%d/%m/%y']`
+
+
+[When override the save method in django models?](https://www.sankalpjonna.com/learn-django/how-to-override-the-save-method-in-your-django-models)
+
 
 
 **django shell**

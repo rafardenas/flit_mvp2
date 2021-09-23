@@ -79,12 +79,13 @@
     <div class="flex mb-4">
         <div class="progressbar-wrapper">
             <ul class="progressbar">
-                <li class="" id="1"><a href="#">Inicio del flete (Ver detalle)</a></li>
-                <li class="" id='2'>En camino a recolección</li>
-                <li class="" id='3'><a href="{% url 'leads:inicio-viaje' viaje.pk %}">Recolección completada (Ver más) </a></li>
-                <li class="" id='4'>En ruta</li>
-                <li class="" id='5'>Descargando</li>
-                <li class="" id='6'><a href="{% url 'leads:fin-viaje' viaje.pk %}">Completado (Ver prueba de entrega)</a></li>
+                <li class="" id="0"><a id = "0a" href="#!">En espera del transportista</a></li>
+                <li class="" id="1"><a id = "1a" href="#!">Inicio del flete</a></li>
+                <li class="" id='2'><a id= "2a" href="#!">En camino a recolección</a></li>
+                <li class="" id='3'><a id = "3a" href="{% url 'leads:inicio-viaje' viaje.pk %}">Recolección completada</a></li>
+                <li class="" id='4'><a id ="4a" href="#!">En ruta</a></li>
+                <li class="" id='5'><a id = "5a" href="#!">Descargando</a></li>
+                <li class="" id='6'><a id="6a" href="{% url 'leads:fin-viaje' viaje.pk %}">Completado</a></li>
             </ul>
         </div>  
     </div>
@@ -94,7 +95,7 @@
     <div class="container px-5 py-0 mx-auto">
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
     <div class="flex py-4" style="align-items: center; display: flex;">
-        <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Ayuda</button></a>
+        <a href="{% url 'leads:ayuda' viaje.pk %}"><button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Ayuda</button></a>
         <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded ">Cancelar Viaje</button></a>
     </div>
     </div>
