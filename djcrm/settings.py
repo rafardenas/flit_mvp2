@@ -6,7 +6,7 @@ sys.path.append("/Users/Rafa/opt/anaconda3/envs/django/lib/python3.9/site-packag
 import environ
 
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, True)
 )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -27,10 +27,11 @@ SECRET_KEY = env('SECRET_KEY')
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-m9f5md2*cs*^6ek%--quu67s7fqcglg7j^nxb+pctc&za-o$x+'
+#SECRET_KEY = 'django-insecure-m9f5md2*cs*^6ek%--quu67s7fqcglg7j^nxb+pctc&za-o$x+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+#DEBUG = True
+print("debug", DEBUG)
 
 ALLOWED_HOSTS = ['*']
 
@@ -148,7 +149,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [ BASE_DIR / "static"]
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATIC_ROOT = "static_root"
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

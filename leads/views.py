@@ -31,14 +31,12 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
     def get_queryset(self):
         # get the current user
         user = self.request.user   
-        print(user.userprofile)   
         # initial queryset for the entire organisation (i.e. the agent or the organisor)
         if user.is_organisor:
             #query all the leads for certain organisation from the *organisation*
             queryset = Viajes.objects.filter(organisation=user.userprofile, 
                     agent__isnull=False)      #if the user is organisor, it will have a userprofile, otherwise that user is an agent.
             queryset = Viajes.objects.filter(organisation=user.userprofile)
-            print(queryset.first())
 
         else:
             #query all the leads for certain organisation from the *agent* (note how the agent and the organisation are linked: a user can be an agent, and an agent has an organisation)
@@ -149,7 +147,7 @@ class AssignAgentView(OrganisorandLoginRequiredMixin, generic.FormView):
 
     def form_valid(self, form):
         # this method handles what happens when the form is submitted
-        print(self.kwargs)
+        #print(self.kwargs)
         agent = form.cleaned_data["agent"]
         lead = Viajes.objects.get(id=self.kwargs["pk"])
         lead.agent = agent
@@ -259,7 +257,7 @@ class InicioViajeView(LoginRequiredMixin, generic.DetailView):
         context = super(InicioViajeView, self).get_context_data(**kwargs)
         queryset2 = Imagenes_viajes.objects.filter(flete=self.get_object().pk)
         queryset2 = queryset2.filter(categoria='Recoleccion')
-        print(queryset2.first())
+        #print(queryset2.first())
         if queryset2.first() == None:
             queryset2 = None
         else:
@@ -297,7 +295,7 @@ class AyudaView(LoginRequiredMixin, generic.CreateView):
     form_class = AyudaForm
     
     def get_queryset(self):
-        print(self.get_object())
+        #print(self.get_object())
         return Viajes.objects.filter(id=self.get_object().id)
 
     def get_success_url(self):
