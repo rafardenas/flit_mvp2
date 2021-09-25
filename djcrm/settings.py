@@ -22,7 +22,6 @@ SECRET_KEY = env('SECRET_KEY')
 
 
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
@@ -31,7 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-print("debug", DEBUG)
+print("debug", READ_DOT_ENV_FILE)
 
 ALLOWED_HOSTS = ['*']
 
@@ -103,7 +102,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         #'NAME': str(BASE_DIR / 'db.sqlite3'),
-        'NAME': 'flitdb_1',
+        'NAME': env("DB_NAME"),
         'USER': env("DB_USER"),
         'HOST': env("DB_HOST"),
         'PASSWORD': env("DB_PASSWORD"),

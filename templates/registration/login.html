@@ -3,20 +3,20 @@
 
 {% block content %} 
 
-    <div class="max-w-lg mx-auto">
+    <div class="max-w-lg mx-auto pb-36">
 
-        <div class="py-5 border-b border-gray-200">
-            <a class="hover:text-blue-500 mt-4" href="{% url 'signup' %}">Crear una cuenta</a>
-        </div>
-
+        <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-gray-900">Iniciar Sesión</h1>
         <form method="POST" class="mt-5">
             {% csrf_token %}
             {{ form|crispy }}
-            <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-md">Login</button>
+            <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-md">Iniciar Sesión</button>
             <hr/>
         </form>
-        <div class="py-5 border-t border-gray-200 mt-5">
-            <a class="hover:text-blue-500 mt-4" href="{% url 'reset-password' %}">Recuperar contraseña</a>
+        <div class="py-5 border-t border-gray-200 mt-5 text-center">
+            <a class="bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0 w-full" href="{% url 'reset-password' %}">Recuperar contraseña?</a>
+        </div>
+        <div class="py-5 border-t border-gray-200 text-center">
+            <a class="bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-400 rounded text-base mt-4 md:mt-0 text-white" href="{% url 'signup' %}">Crear una cuenta</a>
         </div>
     </div>
   

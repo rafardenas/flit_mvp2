@@ -33,10 +33,21 @@
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
         
         {% if not request.user.is_authenticated %}
-          <a href= "{% url 'signup' %}" class="mr-5 hover:text-indigo-500">Regístrate</a>
+        <a href= "{% url 'leads:ayuda-gral' %}" class="mr-5 hover:text-indigo-600">Transportistas</a>
+        <a href= "{% url 'leads:ayuda-gral' %}" class="mr-5 hover:text-indigo-600 hover:font-bold">Embarcadores</a>
+        <style>
+          .vl {
+            border-left: 1px solid gray;
+            height: 3em;
+            margin-right: 1em;
+          }
+          </style>
+          
+          <div class="vl"></div>
+          <a href= "{% url 'signup' %}" class="inline-flex items-center text-white bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-800 rounded text-base mt-4 md:mt-0">Regístrate</a>
         {% else %}
           {% if request.user.is_organisor %}
-          <a href= "{% url 'leads:ayuda-gral' %}" class="mr-5 hover:text-indigo-500">Ayuda</a>
+          <a href= "{% url 'leads:ayuda-gral' %}" class="mr-5 hover:text-indigo-500 ">Ayuda</a>
           {% endif %}
         <a href= "{% url 'leads:lead-list' %}" class="mr-5 hover:text-indigo-500">Mis Viajes</a>
         {% endif %}
@@ -51,11 +62,13 @@
           </svg>
         </a>
       {% else %}
+      
       <a href = "{% url 'login' %}" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Iniciar Sesión
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
           <path d="M5 12h14M12 5l7 7-7 7"></path>
         </svg>
       </a>
+  
       {% endif %}
     </div>
 </header>
@@ -69,5 +82,44 @@
         {% endblock content %}
     </div>
     {% include "scripts.html" %}
+
+    <footer class="text-gray-600 body-font">
+      <div class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col">
+        <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
+          <svg class="h-8 fill-current text-indigo-500 " viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"/></svg>
+          <span class="ml-3 text-xl">Flit</span>
+        </a>
+        <p class="text-md text-gray-500 sm:ml-4 sm:pl-4 sm:border-l-2 sm:border-gray-200 sm:py-2 sm:mt-0 mt-4">© 2021 —
+          {% if not request.user.is_authenticated %}
+          <a href="{% url 'leads:ayuda-gral' %}" class="text-gray-600 ml-1 hover:text-indigo-500" rel="noopener noreferrer" target="_blank">Ayuda</a>
+          {% endif %}
+        </p>
+        <!--Social Icons-->
+        <!-- <span class="inline-flex sm:ml-auto sm:mt-0 mt-4 justify-center sm:justify-start">
+          <a class="text-gray-500">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+              <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
+            </svg>
+          </a>
+          <a class="ml-3 text-gray-500">
+            <svg fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="0" class="w-5 h-5" viewBox="0 0 24 24">
+              <path stroke="none" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"></path>
+              <circle cx="4" cy="4" r="2" stroke="none"></circle>
+            </svg>
+          </a>
+        </span> -->
+      </div>
+    </footer>
 </body>
 </html>

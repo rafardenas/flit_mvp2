@@ -324,7 +324,7 @@ class AyudaView(LoginRequiredMixin, generic.CreateView):
         return super(LeadCreateView, self).form_valid(form)
     """
 
-class AyudaGralView(LoginRequiredMixin, generic.CreateView):
+class AyudaGralView(generic.CreateView):
     template_name = 'leads/ayuda_gral.html'
     form_class = AyudaForm
     
