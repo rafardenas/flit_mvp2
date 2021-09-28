@@ -1,13 +1,20 @@
 {% extends "base.html" %}
+{% load tailwind_filters %}
 
 {% block content %}
-
-    <a href = "{% url 'leads:lead-detail' lead.pk %}"> Back to {{ lead.first_name}} {{ lead.last_name }}</a>
+    <div class="py-4">
+        <a class = "text-gray-500 hover:text-indigo-500 mb-4 py-4" href = "{% url 'leads:lead-detail' viajes.pk%}">Regresar al flete</a>
+    </div>
     <hr>
-    <h1>Update lead: {{ lead.first_name}} {{ lead.last_name }}</h1> 
+    <div class="flex mb-4">
+        <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">Editar Flete: {{ viajes.id }}</a>
+    </div>
+
     <form method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Submit</button>
+        {{ form|crispy }}
+        <div class="content-center md:content-center">
+        <button class="ml-4 text-white bg-green-400 border-0 py-2 mb-4 mt-4 px-6 focus:outline-none hover:bg-green-600 rounded" type="submit">Actualizar</button>
+        </form>
     </form>
 {% endblock content %}

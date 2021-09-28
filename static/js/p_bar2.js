@@ -21,7 +21,7 @@ var length = Object.keys(dictStatus).length
 var i = 0;
 var counter = 0;
 
-while (i <= length) {
+while (i <= length-1) {
     if (i <= estatus) {
         var iid = counter.toString();
         code = dictStatus[iid];
@@ -30,19 +30,23 @@ while (i <= length) {
             document.getElementById("3").innerHTML += ' (Ver más)';
         }
         if (code == 6) {
-            document.getElementById("6").innerHTML += " (Ver prueba de entrega)";
+            document.getElementById("6").innerHTML += " (Ya disponible)";
         }
+        
 
     } else {
         var iid = counter.toString();
         code = dictStatus[iid];
         document.getElementById(code).className = "inactive";
         document.getElementById(code+"a").href = "#!";
-        
+        if (code == 6) {
+            document.getElementById("6").innerHTML += " (Aún no disponible)";
+        }
     }
-    counter = counter+1;
+    counter = counter + 1;
     i++;
 }
+
 
 
 

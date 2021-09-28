@@ -91,6 +91,7 @@ class LeadCreateView(OrganisorandLoginRequiredMixin, generic.CreateView):
     template_name = "leads/lead_create.html"
     form_class = LeadModelForm
     
+    
     def get_success_url(self):
         return reverse("leads:lead-list")
     
@@ -111,6 +112,7 @@ class LeadCreateView(OrganisorandLoginRequiredMixin, generic.CreateView):
 class LeadUpdateView(OrganisorandLoginRequiredMixin, generic.UpdateView):
     template_name = "leads/lead_update.html"
     form_class = LeadModelForm
+    context_object_name = 'viajes'
 
     def get_queryset(self):
         user = self.request.user      

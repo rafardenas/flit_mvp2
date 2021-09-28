@@ -9,7 +9,7 @@
             </div>
             <div class="flex flex-wrap w-full mb-20">
                 <div class="lg:w-1/2 w-full mb-6 lg:mb-0">
-                <p class="tracking-widest text-indigo-500 text-sm font-medium title-font">'Clave del viaje'</p>
+                <p class="tracking-widest text-indigo-500 text-sm font-medium title-font">Flete id: {{ viaje.id }}</p>
             <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-gray-900">Recolección Completada</h1>
             <div class="h-1 w-20 bg-indigo-500 rounded "></div>
         </div>
@@ -19,8 +19,8 @@
             <div class="bg-gray-100 p-6 rounded-lg ">
                 <img class="h-40 rounded w-full h-full object-cover object-center mb-6" src="{{ imagen.imagen.url }}" alt="content">
                 <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Carta de Porte</h3>
-                <p class="text-sm text-gray-500 mb-2">{{ viaje.f_salida }}</p>
-                <h2 class="text-md text-gray-900 font-medium title-font">Operador: <span class="sm:text-md text-gray-500">{{ 'nombre_del_operador' }}</span></h2>
+                <p class="text-sm text-gray-500 mb-2">Subida en {{ imagen.added_time }}</p>
+                <h2 class="text-md text-gray-900 font-medium title-font">Operador: <span class="sm:text-md text-gray-500">{{ viaje.operador.first_name }} {{ viaje.operador.last_name }} </span></h2>
                 <!--<p class="text-sm text-gray-500 mb-4">Subida en {{ viaje.f_salida }}</p>-->
                 <p class="leading-relaxed text-base text-md">Aqui el operador sube la carta de porte dando como comenzado su trayecto</p>
                 <h3 class="tracking-widest text-indigo-500 text-sm font-medium title-font mt-5" >Observaciones:</h3>

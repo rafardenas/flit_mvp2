@@ -1,8 +1,10 @@
 from django.db import models
+from django.db.models.deletion import SET_NULL
 from django.db.models.signals import post_save  # listens just before we commit to the database
 from django.contrib.auth.models import AbstractUser
-from datetime import date
+from datetime import date, datetime
 import os
+import random
 
 class User(AbstractUser):
     is_organisor = models.BooleanField(default=True) 
@@ -37,7 +39,13 @@ class Viajes(models.Model):
         ('6', '6'),
     )
 
+    def pk_generator():
+        chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        intss = '1234567890'
+        randomstr = ''.join((random.choice(chars)) for x in range(3)) + ''.join((random.choice(intss)) for x in range(4)) 
+        return randomstr
 
+    id = models.CharField(default = pk_generator, primary_key=True, max_length=10)
     origen = models.CharField(max_length=20)
     destino = models.CharField(max_length=20)
     f_salida = models.DateField(default=date.today)
@@ -47,7 +55,8 @@ class Viajes(models.Model):
     cantidad = models.IntegerField(default=0)
     cantidad_tipo = models.CharField(default='Otro', choices=TIPO_CANTIDAD, max_length=30)
     status = models.CharField(default='0', choices=STATUS, max_length=30)
-
+    operador = models.ForeignKey("Operador", null=True, blank=True, on_delete=models.SET_NULL)
+    linea_transporte = models.ForeignKey("LineaTransporte", null=True, blank=True, on_delete=models.SET_NULL)
 
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)                # because the agent can be optional, we have to add this field as a way to filter the leads via the User profile
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
@@ -86,6 +95,7 @@ class Imagenes_viajes(models.Model):
     categoria  = models.CharField(default=None, choices=CATEGORIA, max_length=30)
     flete = models.ForeignKey(Viajes, on_delete=models.CASCADE)
     imagen = models.ImageField(default='default.jpg', upload_to=photopath)
+    added_time = models.DateTimeField(default=datetime.now)
 
     def __str__(self):
         return f"{self.flete}  - {self.categoria}"
@@ -94,16 +104,12 @@ class Imagenes_viajes(models.Model):
     #    super(Imagenes_viajes, self).save(*args, **kwargs)
     #    print(self.imagen.name)
 
-
-
-
 class Agent(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     # 'organisation' refers to the user that is logged in/the organisor
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)      # if the user is deleted, the agent will be as well. 
     def __str__(self):
         return self.user.email
-
 
 class Category(models.Model):
     name = models.CharField(max_length=30)     # New, Contacted, Unconverted, Converted.
@@ -112,19 +118,48 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
-
-
 class Ayuda(models.Model):
     name = models.CharField(max_length=50)
     flete_id = models.CharField(max_length=10)
     metodo_contacto = models.CharField(max_length=30)
-    asunto = models.CharField(max_length=30)
+    asunto = models.CharField(max_length=30, null=True, blank=True)
     mensaje = models.CharField(max_length=150)
 
 """class PreRegistro(models.Model):
     name = 
     email = 
     rol = """
+
+class Operador(models.Model):
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    phone = models.CharField(max_length=30)
+    linea_transporte = models.ForeignKey("LineaTransporte", null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name} - {self.linea_transporte}"  
+
+class LineaTransporte(models.Model):
+    name = models.CharField(max_length=30)
+    rfc = models.CharField(max_length=30)
+    contacto = models.CharField(max_length=30)    
+    calle = models.CharField(max_length=20)    
+    numero = models.CharField(max_length=20)    
+    municipio = models.CharField(max_length=20)    
+    ciudad = models.CharField(max_length=20)    
+    cp = models.CharField(max_length=20)    
+    estado = models.CharField(max_length=20)    
+
+
+    def __str__(self):
+        return f"{self.name}"
+
+
+
+
+
+
+
 
 
 

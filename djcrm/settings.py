@@ -30,7 +30,7 @@ SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
-print("debug", READ_DOT_ENV_FILE)
+#print("debug", READ_DOT_ENV_FILE)
 
 ALLOWED_HOSTS = ['*']
 

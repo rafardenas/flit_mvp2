@@ -9,7 +9,8 @@
                 <div>
                     <a class = "text-gray-500 hover:text-indigo-500 mb-4" href = "{% url 'leads:lead-list'%}">Regresar a viajes</a>
                 </div>
-            <h1 class="text-gray-900 text-3xl title-font font-medium mb-4 mt-4">{{ viaje.origen }} -> {{ viaje.destino }}</h1>
+                <p class="tracking-widest text-indigo-500 text-sm font-medium title-font mt-4">Flete id: {{ viaje.id }}</p>
+            <h1 class="text-gray-900 text-3xl title-font font-medium mb-4 ">{{ viaje.origen }} -> {{ viaje.destino }}</h1>
             <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ viaje.age }} </h2>
 
             <!--PROGRESS BAR
@@ -35,6 +36,16 @@
             <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">Resumen</a>
             </div>
 
+            <div class="flex border-t border-gray-200 py-2">
+                <span class="text-gray-500 font-semibold">Proveedor</span>
+                <span class="ml-auto text-gray-500 font-semibold">
+                    {% if viaje.operador.linea_transporte %}
+                        {{ viaje.operador.linea_transporte }}
+                    {% else %}
+                        Por asignar
+                    {% endif %}
+                </span>
+            </div>
             <div class="flex border-t border-gray-200 py-2">
                 <span class="text-gray-500">Fecha de salida</span>
                 <span class="ml-auto text-gray-500">{{ viaje.f_salida }}</span>
@@ -79,13 +90,13 @@
     <div class="flex mb-4">
         <div class="progressbar-wrapper">
             <ul class="progressbar">
-                <li class="" id="0"><a id = "0a" href="#!">En espera del transportista</a></li>
-                <li class="" id="1"><a id = "1a" href="#!">Inicio del flete</a></li>
-                <li class="" id='2'><a id= "2a" href="#!">En camino a recolección</a></li>
-                <li class="" id='3'><a id = "3a" href="{% url 'leads:inicio-viaje' viaje.pk %}">Recolección completada</a></li>
+                <li class="" id="0"><a id ="0a" href="#!">En espera del transportista</a></li>
+                <li class="" id="1"><a id ="1a" href="#!">Inicio del flete</a></li>
+                <li class="" id='2'><a id ="2a" href="#!">En camino a recolección</a></li>
+                <li class="" id='3'><a id ="3a" href="{% url 'leads:inicio-viaje' viaje.pk %}">Recolección completada</a></li>
                 <li class="" id='4'><a id ="4a" href="#!">En ruta</a></li>
-                <li class="" id='5'><a id = "5a" href="#!">Descargando</a></li>
-                <li class="" id='6'><a id="6a" href="{% url 'leads:fin-viaje' viaje.pk %}">Completado</a></li>
+                <li class="" id='5'><a id ="5a" href="#!">Descargando</a></li>
+                <li class="" id='6'><a id= "6a" href="{% url 'leads:fin-viaje' viaje.pk %}">Completado, ver prueba de entrega</a></li>
             </ul>
         </div>  
     </div>
@@ -96,6 +107,9 @@
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
     <div class="flex py-4" style="align-items: center; display: flex;">
         <a href="{% url 'leads:ayuda' viaje.pk %}"><button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Ayuda</button></a>
+        {% if viaje.status == '0' %}
+            <a href="{% url 'leads:lead-update' viaje.pk %}"><button id="editar" class="flex ml-4 text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded ">Editar Viaje</button></a>
+        {% endif %}
         <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded ">Cancelar Viaje</button></a>
     </div>
     </div>
