@@ -25,10 +25,10 @@
 
 <body class="leading-normal tracking-normal text-gray-900" style="font-family: 'Source Sans Pro', sans-serif;">
 
-<div class="h-screen pb-14 bg-right bg-cover" style="background-image: url(static/images/circles.svg)" src="{% static 'images/circles.svg' %}">
+<div class="h-screen pb-10 bg-right bg-cover" style="background-image: url(static/images/circles.svg)" src="{% static 'images/circles.svg' %}">
 
 <!--Main-->
-<div class="container pt-24 md:pt-48 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center">
+<div class="container pt-10 md:pt-20 px-6 mx-auto flex flex-wrap flex-col md:flex-row items-center">
    
    <!--Left Col-->
    <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
@@ -39,12 +39,12 @@
        <p class="text-indigo-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Empieza aquí:</p>
        {% if not request.user.is_authenticated %}
        <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
-            <a href="#_" class="relative inline-block px-7 py-3 mr-2 font-medium group">
+            <a href="{% url 'leads:embarcadores' %}" class="relative inline-block px-7 py-3 mr-2 font-medium group">
                 <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
                 <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
-                <span class="relative text-black group-hover:text-white">Para embarcadores</span>
+                <span class="relative text-black group-hover:text-white">Para Embarcadores</span>
             </a>
-            <a href="#_" class="relative inline-block px-7 mx-2 py-3 font-medium group">
+            <a href="{% url 'leads:transportistas' %}" class="relative inline-block px-7 mx-2 py-3 font-medium group">
                 <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
                 <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
                 <span class="relative text-black group-hover:text-white">Para Transportistas</span>

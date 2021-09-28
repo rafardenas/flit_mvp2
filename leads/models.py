@@ -121,6 +121,12 @@ class Ayuda(models.Model):
     asunto = models.CharField(max_length=30)
     mensaje = models.CharField(max_length=150)
 
+"""class PreRegistro(models.Model):
+    name = 
+    email = 
+    rol = """
+
+
 
 
 def post_user_created_signal(sender, instance, created, **kwargs):

@@ -7,8 +7,9 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views import generic
 from .models import Viajes, Agent, Category, Imagenes_viajes
-from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm, AyudaForm
+from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm, AyudaForm, CustomAuthenticationForm
 from agents.mixins import OrganisorandLoginRequiredMixin
+from django.contrib.auth.views import LoginView
 
 # Create your views here.
 
@@ -330,3 +331,10 @@ class AyudaGralView(generic.CreateView):
     
     def get_success_url(self):
         return reverse("leads:lead-list")
+
+class EnConstruccionView(generic.TemplateView):
+    template_name = 'construccion.html' 
+
+
+class CustomLoginView(LoginView):
+    authentication_form = CustomAuthenticationForm

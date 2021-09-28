@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (LeadListView, LeadDetailView, LeadCreateView, LeadUpdateView, 
     LeadDeleteView, AssignAgentView, CategoryListView, CategoryDetailView, LeadCategoryUpdateView, InicioViajeView, FinViajeView,
-    AyudaView, AyudaGralView
+    AyudaView, AyudaGralView, EnConstruccionView
     )
 
 
@@ -20,5 +20,8 @@ urlpatterns = [
     path('<int:pk>/inicio-viaje', InicioViajeView.as_view(), name='inicio-viaje'),       
     path('<int:pk>/fin-viaje', FinViajeView.as_view(), name='fin-viaje'),       
     path('<int:pk>/ayuda', AyudaView.as_view(), name='ayuda'),       
-    path('help', AyudaGralView.as_view(), name='ayuda-gral'),       
+    path('help', AyudaGralView.as_view(), name='ayuda-gral'),
+    path('transportistas', EnConstruccionView.as_view(), name='transportistas'),
+    path('embarcadores', EnConstruccionView.as_view(), name='embarcadores'),
+
 ]
