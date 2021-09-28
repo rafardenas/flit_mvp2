@@ -17,9 +17,17 @@
     <div class="flex flex-wrap -m-4 ">
         <div class="xl:w-1/2 xl:h-1/2 p-4 ">
             <div class="bg-gray-100 p-6 rounded-lg ">
-                <img class="h-40 rounded w-full h-full object-cover object-center mb-6" src="{{ imagen.imagen.url }}" alt="content">
+                {% if imagen.imagen.url %}
+                    <img class="h-40 rounded w-full h-full object-cover object-center mb-6" src="{{ imagen.imagen.url }}" alt="content">
+                {% else %}
+                    <img class="h-40 rounded w-full h-full object-cover object-center mb-6" src="https://flit-documents-1.s3.us-east-2.amazonaws.com/imagenes-fletes/default.png" alt="content">
+                {% endif %}
                 <h3 class="tracking-widest text-indigo-500 text-xs font-medium title-font">Carta de Porte</h3>
-                <p class="text-sm text-gray-500 mb-2">Subida en {{ imagen.added_time }}</p>
+                {% if imagen %}
+                    <p class="text-sm text-gray-500 mb-2">Subida en {{ imagen.added_time }}</p>
+                {% else %}
+                    <p class="text-sm text-gray-500 mb-2">Imagen pendiente de agregar</p>
+                {% endif %}
                 <h2 class="text-md text-gray-900 font-medium title-font">Operador: <span class="sm:text-md text-gray-500">{{ viaje.operador.first_name }} {{ viaje.operador.last_name }} </span></h2>
                 <!--<p class="text-sm text-gray-500 mb-4">Subida en {{ viaje.f_salida }}</p>-->
                 <p class="leading-relaxed text-base text-md">Aqui el operador sube la carta de porte dando como comenzado su trayecto</p>

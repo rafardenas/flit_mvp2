@@ -7,10 +7,12 @@
         <div class="lg:w-4/5 mx-auto flex flex-wrap">
             <div class="lg:w-1/2 w-full lg:pr-8 lg:py-6 mb-6 lg:mb-0">
                 <div>
-                    <a class = "text-gray-500 hover:text-indigo-500 mb-4" href = "{% url 'leads:lead-list'%}">Regresar a viajes</a>
+                    <a class = "text-gray-500 hover:text-indigo-500 mb-4 border-b-2" href = "{% url 'leads:lead-list'%}">Regresar a todos los fletes</a>
                 </div>
-                <p class="tracking-widest text-indigo-500 text-sm font-medium title-font mt-4">Flete id: {{ viaje.id }}</p>
-            <h1 class="text-gray-900 text-3xl title-font font-medium mb-4 ">{{ viaje.origen }} -> {{ viaje.destino }}</h1>
+                <p class="tracking-widest text-indigo-500 text-sm font-medium title-font mt-4">Flete ID: {{ viaje.id }}</p>
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-4 ">{{ viaje.origen }} 
+                    &#8594
+                    {{ viaje.destino }}</h1>
             <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ viaje.age }} </h2>
 
             <!--PROGRESS BAR
@@ -37,7 +39,7 @@
             </div>
 
             <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500 font-semibold">Proveedor</span>
+                <span class="text-gray-500 font-semibold">Transportista</span>
                 <span class="ml-auto text-gray-500 font-semibold">
                     {% if viaje.operador.linea_transporte %}
                         {{ viaje.operador.linea_transporte }}
@@ -56,7 +58,7 @@
             </div>
             <div class="flex border-t border-gray-200 py-2">
                 <span class="text-gray-500">Costo</span>
-                <span class="ml-auto text-gray-500">"costo"</span>
+                <span class="ml-auto text-gray-500">{{ viaje.costo }} &#x0024</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
                 <span class="text-gray-500">Mercancia</span>
@@ -82,7 +84,7 @@
     </div>
 
     <div class="flex mb-4">
-        <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1 mt-6">Estatus del viaje</a>
+        <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1 mt-6">Estatus del Flete</a>
     </div>
     <span class="text-xs" style="opacity: 0">Status: </span>
     <span class="text-xs" style="opacity: 0;" id="demo">{{ viaje.status }}</span>
@@ -108,9 +110,9 @@
     <div class="flex py-4" style="align-items: center; display: flex;">
         <a href="{% url 'leads:ayuda' viaje.pk %}"><button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Ayuda</button></a>
         {% if viaje.status == '0' %}
-            <a href="{% url 'leads:lead-update' viaje.pk %}"><button id="editar" class="flex ml-4 text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded ">Editar Viaje</button></a>
+            <a href="{% url 'leads:lead-update' viaje.pk %}"><button id="editar" class="flex ml-4 text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded ">Editar Flete</button></a>
         {% endif %}
-        <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded ">Cancelar Viaje</button></a>
+        <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded ">Cancelar Flete</button></a>
     </div>
     </div>
     </div>

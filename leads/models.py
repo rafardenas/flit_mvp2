@@ -51,6 +51,7 @@ class Viajes(models.Model):
     f_salida = models.DateField(default=date.today)
     f_llegada = models.DateField(default=date.today)
     tipo_embarque = models.CharField(default=None, choices=TIPO_EMBARQUE, max_length=30)
+    costo = models.CharField(default='0', max_length=20, blank=True, null=True)
     mercancia = models.CharField(max_length=20)
     cantidad = models.IntegerField(default=0)
     cantidad_tipo = models.CharField(default='Otro', choices=TIPO_CANTIDAD, max_length=30)

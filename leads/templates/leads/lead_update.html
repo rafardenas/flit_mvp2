@@ -3,13 +3,15 @@
 
 {% block content %}
     <div class="py-4">
-        <a class = "text-gray-500 hover:text-indigo-500 mb-4 py-4" href = "{% url 'leads:lead-detail' viajes.pk%}">Regresar al flete</a>
+        <a class = "text-gray-500 hover:text-indigo-500 mb-4 border-b-2" href = "{% url 'leads:lead-detail' viajes.pk%}">Regresar al flete</a>
     </div>
-    <hr>
-    <div class="flex mb-4">
-        <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">Editar Flete: {{ viajes.id }}</a>
+    <div class="flex mb-10">
+        <a class="flex-grow text-indigo-500 border-b-2 border-indigo-500 text-2xl px-1">Editar</a>
     </div>
-
+    
+    <div class="flex">
+        <span class="text-indigo-500 mb-4 ">Flete ID: {{ viajes.id }}</span>
+    </div>
     <form method="POST">
         {% csrf_token %}
         {{ form|crispy }}
