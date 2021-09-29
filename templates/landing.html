@@ -34,21 +34,21 @@
    <div class="flex flex-col w-full xl:w-2/5 justify-center lg:items-start overflow-y-hidden">
        <h1 class="text-3xl md:text-5xl text-gray-500 font-bold leading-tight text-center md:text-left slide-in-bottom-h1">Logística, <br>sin intermediarios, sin desconfianza, </h1>
            <span class="mb-4 text-3xl md:text-5xl text-indigo-500 font-bold leading-tight  md:text-left slide-in-bottom-h1"> con Flit.</span>
-       <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">Tus operaciones logísticas de ahora, <br>pero mejor.</p>
+       <p class="leading-normal text-base md:text-2xl mb-8 text-center md:text-left slide-in-bottom-subtitle">Consigue <span style="color: rgba(99, 102, 241);">fácil y rápido</span> transporte <br>para tus cargas.  <br>Sin llamadas interminables, con transportistas certificados y con la confiabilidad de tus líneas dedicadas.</p>
    
-       <p class="text-indigo-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Empieza aquí:</p>
+       <!-- <p class="text-indigo-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Empieza aquí:</p> -->
        {% if not request.user.is_authenticated %}
        <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
             <a href="{% url 'leads:embarcadores' %}" class="relative inline-block px-7 py-3 mr-2 font-medium group">
                 <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
                 <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
-                <span class="relative text-black group-hover:text-white">Para Embarcadores</span>
+                <span class="relative text-black group-hover:text-white">Empieza aquí</span>
             </a>
-            <a href="{% url 'leads:transportistas' %}" class="relative inline-block px-7 mx-2 py-3 font-medium group">
+            <!-- <a href="{% url 'leads:transportistas' %}" class="relative inline-block px-7 mx-2 py-3 font-medium group">
                 <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
                 <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
                 <span class="relative text-black group-hover:text-white">Para Transportistas</span>
-            </a>
+            </a> -->
        </div>
        {% else %}
        <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
