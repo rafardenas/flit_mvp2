@@ -42,10 +42,12 @@ class Viajes(models.Model):
     def pk_generator():
         chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
         intss = '1234567890'
-        randomstr = ''.join((random.choice(chars)) for x in range(3)) + ''.join((random.choice(intss)) for x in range(4)) 
-        return randomstr
+        # uncomment to use a more compley flete id
+        #randomstr = ''.join((random.choice(chars)) for x in range(3)) + ''.join((random.choice(intss)) for x in range(4)) 
+        randomint = ''.join((random.choice(intss)) for x in range(5)) 
+        return 1
 
-    id = models.CharField(default = pk_generator, primary_key=True, max_length=10)
+    id = models.CharField(default=pk_generator, primary_key=True, max_length=10, unique=True)
     origen = models.CharField(max_length=20)
     destino = models.CharField(max_length=20)
     f_salida = models.DateField(default=date.today)

@@ -7,9 +7,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.views import generic
 from .models import Viajes, Agent, Category, Imagenes_viajes
-from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm, AyudaForm, CustomAuthenticationForm
+from .forms import LeadModelForm, CustomUserCreationForm, AssignAgentForm, LeadCategoryUpdateForm, CustomAuthenticationForm, AyudaForm
 from agents.mixins import OrganisorandLoginRequiredMixin
 from django.contrib.auth.views import LoginView
+from django.db import IntegrityError
+import random
 
 # Create your views here.
 
@@ -89,23 +91,28 @@ class LeadDetailView(LoginRequiredMixin, generic.DetailView):
 
 class LeadCreateView(OrganisorandLoginRequiredMixin, generic.CreateView):
     template_name = "leads/lead_create.html"
-    form_class = LeadModelForm
-    
+    form_class = LeadModelForm    
     
     def get_success_url(self):
         return reverse("leads:lead-list")
     
+    def pk_generator(self):
+        chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        intss = '1234567890'
+        # uncomment to use a str
+        #randomstr = ''.join((random.choice(chars)) for x in range(3)) + ''.join((random.choice(intss)) for x in range(4)) 
+        randomint = ''.join((random.choice(intss)) for x in range(5)) 
+        return randomint
+
     def form_valid(self, form):
         lead = form.save(commit=False)
+        print(lead)
         lead.organisation = self.request.user.userprofile
-        lead.save()
-        
-        # send email
-        send_mail(
-            subject="Se ha creado un nuevo viaje", 
-            message="Entra a Flit para monitorear el progreso",
-            from_email="test@test.com",
-            recipient_list=["test2@test.com"])
+        try:
+            lead.save()
+        except IntegrityError:
+            lead.pk = self.pk_generator()
+            lead.save()     
         return super(LeadCreateView, self).form_valid(form)
 
 
@@ -271,7 +278,6 @@ class InicioViajeView(LoginRequiredMixin, generic.DetailView):
         return context
 
 
-
 class FinViajeView(LoginRequiredMixin, generic.DetailView):
     template_name = 'leads/viaje_completado.html'
     queryset = Viajes.objects.all()
@@ -291,8 +297,6 @@ class FinViajeView(LoginRequiredMixin, generic.DetailView):
             })
         return context
 
-
-
 class AyudaView(LoginRequiredMixin, generic.CreateView):
     template_name = 'leads/ayuda.html'
     form_class = AyudaForm
@@ -310,22 +314,6 @@ class AyudaView(LoginRequiredMixin, generic.CreateView):
         initial['name'] = self.request.user
         initial['flete_id'] = self.kwargs["pk"]
         return initial
-
-
-    """
-    def form_valid(self, form):s
-        lead = form.save(commit=False)
-        lead.organisation = self.request.user.userprofile
-        lead.save()
-        
-        # send email
-        send_mail(
-            subject="Se ha creado un nuevo viaje", 
-            message="Entra a Flit para monitorear el progreso",
-            from_email="test@test.com",
-            recipient_list=["test2@test.com"])
-        return super(LeadCreateView, self).form_valid(form)
-    """
 
 class AyudaGralView(generic.CreateView):
     template_name = 'leads/ayuda_gral.html'

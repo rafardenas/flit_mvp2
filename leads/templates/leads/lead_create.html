@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="max-w-lg mx-auto">
-        <a class="hover:text-blue-500 mb-4" href = "{% url 'leads:lead-list'%}">Regresar a viajes</a>
+        <a class="hover:text-blue-500 mb-4" href = "{% url 'leads:lead-list' %}">Regresar a viajes</a>
         <div class="py-5 border-t border-gray-200 mt-4">
             <h1 class="text-2xl text-gray-800 mb-4">Crear un nuevo viaje</h1>
         </div>
@@ -14,5 +14,4 @@
                 Crear</button>
         </form>
     </div>
-
 {% endblock content %}
