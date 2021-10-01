@@ -128,11 +128,25 @@ class Ayuda(models.Model):
     asunto = models.CharField(max_length=30, null=True, blank=True)
     mensaje = models.CharField(max_length=150)
 
-"""class PreRegistro(models.Model):
-    name = 
-    email = 
-    rol = """
+class PreRegistro(models.Model):
+    #ROLES = (
+    #    ('Transportista', 'Quiero enviar mi mercancia con Flit'),
+    #    ('Embarcador', 'Quiero trabajar como transportista en Flit'),
+    #)
 
+    ROLES = (
+        ('Transportista', 'Transportista'),
+        ('Embarcador', 'Embarcador'),
+    )
+
+
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.CharField(max_length=50)
+    telefono = models.IntegerField(null=True, blank=True)
+    rol = models.CharField(default=None, choices=ROLES, max_length=50)
+    compania = models.CharField(max_length=50)
+    
 class Operador(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -156,16 +170,6 @@ class LineaTransporte(models.Model):
 
     def __str__(self):
         return f"{self.name}"
-
-
-
-
-
-
-
-
-
-
 
 def post_user_created_signal(sender, instance, created, **kwargs):
     if created:

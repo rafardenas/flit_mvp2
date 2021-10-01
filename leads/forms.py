@@ -1,9 +1,10 @@
+from typing import Optional
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm, UsernameField, AuthenticationForm
 from django.db.models import fields
 from django.forms.widgets import NumberInput
-from .models import Viajes, Agent, Ayuda
+from .models import Viajes, Agent, Ayuda, PreRegistro
 from datetime import date
 from django.forms.widgets import NumberInput
 
@@ -68,15 +69,10 @@ class AyudaForm(forms.ModelForm):
     asunto = forms.CharField(label="Asunto")
     mensaje = forms.CharField(label="Mensaje")
     
-
     class Meta:
         model = Ayuda
         fields = '__all__'
     
-    #def get_initial(self):
-
-
-
 class CustomAuthenticationForm(AuthenticationForm):
     username = UsernameField(
         label='Nombre de Usuario',
@@ -87,3 +83,20 @@ class CustomAuthenticationForm(AuthenticationForm):
         strip=False,
         widget=forms.PasswordInput(attrs={'autocomplete': 'current-password'}),
     )
+
+class PreRegistroForm(forms.ModelForm):
+    ROLES = (
+        ('Transportista', 'Transportista'),
+        ('Embarcador', 'Embarcador'),
+    )
+
+    first_name = forms.CharField(label="Nombre", initial = "")
+    last_name = forms.CharField(label="Apellido", initial = "")
+    email = forms.CharField(label="Correo Electrónico", initial = "")
+    telefono = forms.IntegerField(required=False)
+    rol = forms.ChoiceField(label="Selecciona", choices=ROLES)
+    compania = forms.CharField(label="Compañia")
+
+    class Meta:
+        model = PreRegistro
+        fields = '__all__'

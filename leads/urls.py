@@ -1,7 +1,7 @@
 from django.urls import path
 from .views import (LeadListView, LeadDetailView, LeadUpdateView, 
     LeadDeleteView, AssignAgentView, CategoryListView, CategoryDetailView, LeadCategoryUpdateView, InicioViajeView, FinViajeView,
-    EnConstruccionView, LeadCreateView, AyudaView, AyudaGralView
+    EnConstruccionView, LeadCreateView, AyudaView, AyudaGralView, PreRegistroView
     )
 
 
@@ -23,5 +23,6 @@ urlpatterns = [
     path('help', AyudaGralView.as_view(), name='ayuda-gral'),
     path('transportistas', EnConstruccionView.as_view(), name='transportistas'),
     path('embarcadores', EnConstruccionView.as_view(), name='embarcadores'),
+    path('preregister', PreRegistroView.as_view(), name='preregistro'),
 
 ]

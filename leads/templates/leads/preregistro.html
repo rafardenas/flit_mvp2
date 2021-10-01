@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load tailwind_filters %}
+
+{% block content %}
+    <section class="text-gray-600 body-font">
+        <div class="container px-5 py-20 mx-auto flex flex-wrap items-center">
+        <div class="lg:w-3/5 md:w-1/2 md:pr-16 lg:pr-0 pr-0 -mt-32">
+            <h1 class="title-font font-medium text-3xl text-indigo-500 pb-5">Página en construcción</h1>
+            <h1 class="flex-grow sm:pr-16 text-lg font-medium title-font text-gray-400">
+                Esta página aún no esta disponible, hemos estado ocupados impulsando la logística del futuro en México.
+                <br>
+                Si quieres estar <span class="text-indigo-500">aún más adelante que tu competencia</span>, forma parte de nuestra prueba piloto!
+            </h1>
+        </div>
+        <div class="lg:w-2/6 md:w-1/2 bg-gray-100 rounded-lg p-8 flex flex-col md:ml-auto w-full mt-8 md:mt-0 -mt-8">
+            <h2 class="text-indigo-500 text-2xl font-medium title-font mb-5 text-center">Pre-registro</h2>
+            <div class="relative mb-4">
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                </form>
+            </div>
+            <button class="text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">Registrarme</button>
+            <p class="text-xs text-gray-500 mt-3 text-center">Gracias por dejarnos ayudarte</p>
+        </div>
+        </div>
+    </section>
+{% endblock content %}

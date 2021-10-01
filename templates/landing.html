@@ -38,8 +38,8 @@
    
        <!-- <p class="text-indigo-400 font-bold pb-8 lg:pb-6 text-center md:text-left fade-in">Empieza aquí:</p> -->
        {% if not request.user.is_authenticated %}
-       <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
-            <a href="{% url 'leads:embarcadores' %}" class="relative inline-block px-7 py-3 mr-2 font-medium group">
+       <div class="flex w-full justify-center md:justify-start pb-5 lg:pb-0 fade-in">
+            <a href="{% url 'leads:preregistro' %}" class="relative inline-block px-7 py-3 mr-2 font-medium group">
                 <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
                 <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
                 <span class="relative text-black group-hover:text-white">Empieza aquí</span>
@@ -51,7 +51,7 @@
             </a> -->
        </div>
        {% else %}
-       <div class="flex w-full justify-center md:justify-start pb-24 lg:pb-0 fade-in">
+       <div class="flex w-full justify-center md:justify-start pb-5 lg:pb-0 fade-in">
         <a href="{% url 'leads:lead-list' %}" class="relative inline-block px-7 py-3 mr-2 font-medium group">
             <span class="absolute inset-0 w-full h-full transition duration-200 ease-out transform translate-x-1 translate-y-1 bg-black group-hover:-translate-x-0 group-hover:-translate-y-0"></span>
             <span class="absolute inset-0 w-full h-full bg-white border-2 border-black group-hover:bg-black"></span>
