@@ -92,7 +92,7 @@ class PreRegistroForm(forms.ModelForm):
 
     first_name = forms.CharField(label="Nombre", initial = "")
     last_name = forms.CharField(label="Apellido", initial = "")
-    email = forms.CharField(label="Correo Electrónico", initial = "")
+    email = forms.EmailField(label="Correo Electrónico")
     telefono = forms.IntegerField(required=False)
     rol = forms.ChoiceField(label="Selecciona", choices=ROLES)
     compania = forms.CharField(label="Compañia")
