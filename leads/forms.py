@@ -86,8 +86,8 @@ class CustomAuthenticationForm(AuthenticationForm):
 
 class PreRegistroForm(forms.ModelForm):
     ROLES = (
-        ('Transportista', 'Transportista'),
         ('Embarcador', 'Embarcador'),
+        ('Transportista', 'Transportista'),
     )
 
     first_name = forms.CharField(label="Nombre", initial = "")
