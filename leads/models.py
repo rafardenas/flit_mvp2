@@ -41,11 +41,11 @@ class Viajes(models.Model):
 
     def pk_generator():
         chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        intss = '1234567890'
+        intss = '123456789'
         # uncomment to use a more compley flete id
         #randomstr = ''.join((random.choice(chars)) for x in range(3)) + ''.join((random.choice(intss)) for x in range(4)) 
         randomint = ''.join((random.choice(intss)) for x in range(5)) 
-        return 1
+        return randomint
 
     id = models.CharField(default=pk_generator, primary_key=True, max_length=10, unique=True)
     origen = models.CharField(max_length=20)
@@ -80,7 +80,7 @@ class Viajes(models.Model):
     #special_files = models.FileField(blank=True, null=True)
 
     def __str__(self):
-        return f"{self.origen}  - {self.destino}"
+        return f"{self.id} : {self.origen}  - {self.destino}"
 
 class Imagenes_viajes(models.Model):
     CATEGORIA = (

@@ -29,7 +29,7 @@
     <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
       <a class="flex items-center text-indigo-500 no-underline hover:no-underline font-bold text-2xl lg:text-4xl"  href="{% url 'landing-page' %}"> 
         <svg class="h-8 fill-current text-indigo-500 pr-3" viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"/></svg> Flit 
-   </a>
+      </a>
       
       <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
         
@@ -58,20 +58,20 @@
       </nav>
       
       {% if request.user.is_authenticated %}
-        Hola {{ request.user.username }}!
-        <a href = "{% url 'logout' %}" class="ml-3 inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Salir
-          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-            <path d="M5 12h14M12 5l7 7-7 7"></path>
-          </svg>
-        </a>
-      {% else %}
-      
-      <a href = "{% url 'login' %}" class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Iniciar Sesión
+      Hola {{ request.user.username }}!
+      <a href = "{% url 'logout' %}" class="ml-3 inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Salir
         <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
           <path d="M5 12h14M12 5l7 7-7 7"></path>
         </svg>
       </a>
-  
+      {% else %}
+      
+      <a href = "{% url 'login' %}" class="inline-flex items-center bg-gray-100 border-0 h-full px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Iniciar Sesión
+        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+          <path d="M5 12h14M12 5l7 7-7 7"></path>
+        </svg>
+      </a>
+      <a class="mr-5 ml-3 inline-flex items-center border-2 border-indigo-100 py-0 px-2 focus:outline-none rounded text-base mt-4 md:mt-0">(81) 2688 7815</a>
       {% endif %}
     </div>
 </header>
@@ -80,13 +80,15 @@
 
 
 <body>
-    <div class="max-w-7xl mx-auto">
-        {% block content %}
-        {% endblock content %}
-    </div>
-    {% include "scripts.html" %}
+  <div class="max-w-7xl mx-auto">
+    {% block content %}
+    {% endblock content %}
+  </div>
+  {% include "scripts.html" %}
+  
 
-    <footer class="text-gray-600 relative" style="position: relative; bottom: 0; width: 100%;">
+
+  <footer class="text-gray-600 relative" style="position: relative; bottom: 0; width: 100%;">
       <div class="container px-5 pb-8 mx-auto flex items-center sm:flex-row flex-col">
         <a class="flex title-font font-medium items-center md:justify-start justify-center text-gray-900">
           <svg class="h-8 fill-current text-indigo-500 " viewBox="0 0 20 20"><path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm-5.6-4.29a9.95 9.95 0 0 1 11.2 0 8 8 0 1 0-11.2 0zm6.12-7.64l3.02-3.02 1.41 1.41-3.02 3.02a2 2 0 1 1-1.41-1.41z"/></svg>
@@ -124,5 +126,5 @@
         </span> -->
       </div>
     </footer>
-</body>
+  </body>
 </html>

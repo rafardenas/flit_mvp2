@@ -98,7 +98,7 @@ class LeadCreateView(OrganisorandLoginRequiredMixin, generic.CreateView):
     
     def pk_generator(self):
         chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        intss = '1234567890'
+        intss = '123456789'
         # uncomment to use a str
         #randomstr = ''.join((random.choice(chars)) for x in range(3)) + ''.join((random.choice(intss)) for x in range(4)) 
         randomint = ''.join((random.choice(intss)) for x in range(5)) 
@@ -111,6 +111,7 @@ class LeadCreateView(OrganisorandLoginRequiredMixin, generic.CreateView):
         try:
             lead.save()
         except IntegrityError:
+            #In case the primary key already exists. See: https://stackoverflow.com/questions/29657312/update-primary-key-django-mysql
             lead.pk = self.pk_generator()
             lead.save()     
         return super(LeadCreateView, self).form_valid(form)
