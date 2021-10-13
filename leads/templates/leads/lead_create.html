@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load tailwind_filters %}
+{% load static %}
 
 {% block content %}
     <div class="max-w-lg mx-auto mb-10">
@@ -9,8 +10,14 @@
         <form method="POST">
             {% csrf_token %}
             {{ form|crispy }}
+            <button type="submit" disabled style="display: none" aria-hidden="true"></button>
             <button type="submit" class="w-full text-white bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded-md mt-5 mb-10">
                 Crear Flete</button>
         </form>
     </div>
+
+    <script 
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsEgEALRMyIPqumJep9Tmn8Sj39MQIQTI&libraries=places">
+    </script>
+    <script src="{% static 'js/place_autocomplete.js' %}"></script>
 {% endblock content %}

@@ -48,8 +48,8 @@ class Viajes(models.Model):
         return randomint
 
     id = models.CharField(default=pk_generator, primary_key=True, max_length=10, unique=True)
-    origen = models.CharField(max_length=20)
-    destino = models.CharField(max_length=20)
+    origen = models.CharField(max_length=70)
+    destino = models.CharField(max_length=70)
     f_salida = models.DateField(default=date.today)
     f_llegada = models.DateField(default=date.today)
     tipo_embarque = models.CharField(default=None, choices=TIPO_EMBARQUE, max_length=30)
