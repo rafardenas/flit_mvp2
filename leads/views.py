@@ -12,6 +12,7 @@ from agents.mixins import OrganisorandLoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.db import IntegrityError
 import random
+from .filters import ViajesFilter
 
 # Create your views here.
 
@@ -38,9 +39,8 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
         if user.is_organisor:
             #query all the leads for certain organisation from the *organisation*
             queryset = Viajes.objects.filter(organisation=user.userprofile, 
-                    agent__isnull=False)      #if the user is organisor, it will have a userprofile, otherwise that user is an agent.
-            queryset = Viajes.objects.filter(organisation=user.userprofile)
-
+                    agent__isnull=True).order_by('f_llegada')      #if the user is organisor, it will have a userprofile, otherwise that user is an agent.
+                                                                  # '-' before column name mean descending order without '-' mean ascending
         else:
             #query all the leads for certain organisation from the *agent* (note how the agent and the organisation are linked: a user can be an agent, and an agent has an organisation)
             queryset= Viajes.objects.filter(organisation=user.agent.organisation)
@@ -71,6 +71,7 @@ class LeadListView(LoginRequiredMixin, generic.ListView):
             context.update({
                 "otros_viajes": queryset
             })
+        context['filter'] = ViajesFilter(self.request.GET, queryset=self.get_queryset())
         return context
 
 

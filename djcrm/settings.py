@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "crispy_tailwind",
     'bootstrap_datepicker_plus',
     'storages',
+    'django_filters',
 
 
     # local apps
