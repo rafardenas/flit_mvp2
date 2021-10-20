@@ -12,7 +12,7 @@ from agents.mixins import OrganisorandLoginRequiredMixin
 from django.contrib.auth.views import LoginView
 from django.db import IntegrityError
 import random
-from .filters import ViajesFilter
+from .filters import ViajesFilter, horizontal_form
 
 # Create your views here.
 

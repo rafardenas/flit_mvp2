@@ -5,7 +5,8 @@
 <section class="text-gray-600 body-font h-screen">
     <div class="container px-5 py-1 mx-auto h-screen ">
         
-        <div class="flex justify-between items-left lg:w-3/5 mx-auto border-b py-2 mb-4 mt-2  border-gray-200 sm:flex-row flex-col">
+    
+        <div class="flex justify-between items-left lg:w-4/5 mx-auto border-b py-2 mb-4 mt-2  border-gray-200 sm:flex-row flex-col">
             <div>
                 <h1 class="text-2xl text-gray-800 mb-2">Mis Fletes</h1> 
                 <!-- <a class="border-indigo-300 border-2 py-1 px-3 focus:outline-none hover:bg-indigo-100 rounded text-base mt-4 md:mt-0 text-black" href="#">
@@ -14,7 +15,7 @@
             </div>
             {% if request.user.is_organisor %}
                 <div>
-                    <a class="bg-indigo-500 border-0 py-1 px-3 focus:outline-none hover:bg-indigo-700 rounded text-base mt-4 md:mt-0 text-white" href="{% url 'leads:lead-create' %}">
+                    <a class="bg-indigo-500 border-0 py-2 px-5 focus:outline-none hover:bg-indigo-700 rounded text-base mt-4 md:mt-0 text-white" href="{% url 'leads:lead-create' %}">
                         Nuevo Flete</a>
                 </div>
             {% endif %}
@@ -33,15 +34,49 @@
                     Nuevo Flete</a>
             </div>
         </div> -->
-        <div class="flex justify-center lg:w-3/5 mx-auto border-b pb-5 mb-3 border-gray-200 sm:flex-row flex-col">
-            <form method="GET">
-                {{ filter.form }}
-                <div>
-                <button class="text-white bg-green-400 border-0 py-2 ml-10 mb-4 mt-4 px-6 focus:outline-none hover:bg-green-600 rounded" type="submit">Aplicar Filtros</button>
-                <a class="text-white bg-green-400 border-0 py-2 ml-10 mb-4 mt-4 px-6 focus:outline-none hover:bg-green-600 rounded" href="{% url 'leads:lead-list' %}">Limpiar</a>
+        <div class="flex justify-center lg:w-4/5 mx-auto border-b pb-5 mb-5 border-gray-200 sm:flex-row flex-col">
+            <div class="flex justify-center lg:w-full">
+                <form method="GET" class="space-y-4 text-center">
+                    <!-- <div class="flex flex-center">
+                            {{ filter.form }}
+                    </div> -->
+                    <div class="inline-block space-x-3 mb-2">
+                        <div class="inline-flex">
+                                {{ filter.form.f_salida.label_tag }}
+                            <div class="label1" style="border:2px solid gray; border-radius: 4px;">
+                                {{ filter.form.f_salida }}
+                            </div> 
+                        </div>
+                    <div class="inline-flex">
+                        {{ filter.form.status.label_tag }}
+                        <div class="label2" style="border:2px solid gray; border-radius: 4px;">
+                            {{ filter.form.status }}
+                        </div>
+                    </div>
+                    <div class="inline-flex">
+                        {{ filter.form.origen.label_tag }}
+                        <div class="label2" style="border:2px solid gray; border-radius: 4px; size: 5px;" >
+                            {{ filter.form.origen }}
+                        </div>
+                    </div>
+                    <div class="inline-flex">
+                        {{ filter.form.destino.label_tag }}
+                        <div class="label2" style="border:2px solid gray; border-radius: 4px; size: 3px;" >
+                            {{ filter.form.destino }}
+                        </div>
+                    </div>
+                    </div>
+                    <div class="block">
+                        <a class="text-white bg-green-400 border-0 py-2 mb-4 mt-4 px-6 focus:outline-none hover:bg-green-600 rounded"><button  type="submit">Aplicar Filtros</button>
+                        </a>
+                        <a class="text-white bg-green-400 border-0 py-2 ml-5 mb-4 mt-4 px-6 focus:outline-none hover:bg-green-600 rounded" href="{% url 'leads:lead-list' %}">Limpiar</a >
+                    </div>
+                </form>
             </div>
-            </form>
         </div>
+            
+        
+        
         {% for viaje in filter.qs %}
         <div class="flex items-center lg:w-3/5 mx-auto border-b pb-10 mb-10 border-gray-200 sm:flex-row flex-col ">
             <div class="sm:w-32 sm:h-32 h-20 w-20 sm:mr-10 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 flex-shrink-0">
@@ -50,7 +85,9 @@
             </svg>
             </div>
             <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
-                <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ viaje.origen }} - {{ viaje.destino }}</h2>
+                <a href="{% url 'leads:lead-detail' viaje.pk %}">
+                    <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ viaje.origen }} - {{ viaje.destino }}</h2>
+                </a>
                 <p class="text-indigo-500 text-sm title-font font-medium mb-0">ID: {{ viaje.id }}</p>
             <p class="leading-relaxed text-base">Llegada estimada: {{ viaje.f_llegada }}</p>
             <p class="leading-relaxed text-base"> Estatus: 
@@ -100,7 +137,7 @@
                         </div>
                         <div class="flex-grow sm:text-left text-center mt-6 sm:mt-0">
                         <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ viaje.first_name }} {{ viaje.last_name }}</h2>
-                        <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
+                        <p class="leading-relaxed text-base">Blue bottle    ucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine.</p>
                         <a href="{% url 'leads:assign-agent' viaje.pk %}" class="mt-3 text-indigo-500 inline-flex items-center">Asignar Broker
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
                             <path d="M5 12h14M12 5l7 7-7 7"></path>

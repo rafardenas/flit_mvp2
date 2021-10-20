@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% load static %}
+
 
 
 {% block content %}
@@ -85,7 +87,8 @@
         </div>
         
         <div class="flex lg:w-1/2  justify-center items-center">
-            <img alt="ecommerce" class="lg:w-3/5 w-full h-50 object-cover object-center rounded" src="https://flit-documents-1.s3.us-east-2.amazonaws.com/imagenes-fletes/map_mvp1.png">
+            <div id="map" style="height: 100%; width: 100%;"></div>
+            <!-- <img alt="ecommerce" class="lg:w-3/5 w-full h-50 object-cover object-center rounded" src="https://flit-documents-1.s3.us-east-2.amazonaws.com/imagenes-fletes/map_mvp1.png"> -->
         </div>
     </div>
 
@@ -117,8 +120,8 @@
         <a href="{% url 'leads:ayuda' viaje.pk %}"><button class="flex ml-auto text-white bg-blue-500 border-0 py-2 px-6 focus:outline-none hover:bg-blue-600 rounded">Ayuda</button></a>
         {% if viaje.status == '0' %}
             <a href="{% url 'leads:lead-update' viaje.pk %}"><button id="editar" class="flex ml-4 text-white bg-yellow-500 border-0 py-2 px-6 focus:outline-none hover:bg-yellow-600 rounded ">Editar Flete</button></a>
+            <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded ">Cancelar Flete</button></a>
         {% endif %}
-        <a href="{% url 'leads:lead-delete' viaje.pk %}"><button class="flex ml-4 text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded ">Cancelar Flete</button></a>
     </div>
     </div>
     </div>
@@ -128,27 +131,12 @@
     </div>
     </section>
 
-    <!-- <script>
-        var i = 0;
-        var counter = 0;
-
-        while (i <= 4) {
-            if (i <= 2) {
-                var iid = counter.toString();
-                var name = document.getElementById("demo").className;
-                console.log(name);
-                //console.log(iid=="1")
-                //cls = document.getElementById(iid).innerHTML;
-                //console.log(cls);
-            } else {
-                //document.getElementById(i.toString()).className = "noactive";
-                //console.log("noactive:", i)
-                
-            }
-            counter = counter+1;
-            i++;
-        }
-    </script> -->
+    <script src="{% static 'js/map_route.js' %}"></script>
+    <script 
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsEgEALRMyIPqumJep9Tmn8Sj39MQIQTI&libraries=places&callback=initMap"> 
+    async
+    
+    </script>
 
 
 

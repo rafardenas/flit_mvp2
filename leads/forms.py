@@ -9,6 +9,7 @@ from datetime import date
 from django.forms.widgets import NumberInput
 
 
+
 # Return the User model that is active in this project.
 User = get_user_model()
 

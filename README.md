@@ -14,6 +14,9 @@ We can use the admin page of the site to update Flit "in the back".
 
 #### Resources
 
+[Dynamic Filters](https://teamtreehouse.com/community/how-to-filter-modelchoicefield-by-fields):
+- Chance the options of the filters based on previous filter selections
+
 [Make Queries](https://docs.djangoproject.com/en/3.2/topics/db/queries/)
 
 - Query for all recors in database *"Car"*
