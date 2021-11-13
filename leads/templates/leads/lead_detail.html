@@ -12,10 +12,12 @@
                     <a class = "text-gray-500 hover:text-indigo-500 mb-4 border-b-2" href = "{% url 'leads:lead-list'%}">Regresar a todos los fletes</a>
                 </div>
                 <p class="tracking-widest text-indigo-500 text-sm font-medium title-font mt-4">Flete ID: {{ viaje.id }}</p>
-                <h1 class="text-gray-900 text-3xl title-font font-medium mb-4 ">{{ viaje.origen }} 
+                <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">
+                    <span id="origin">{{ viaje.origen }}</span>
                     &#8594
-                    {{ viaje.destino }}</h1>
-            <h2 class="text-sm title-font text-gray-500 tracking-widest">{{ viaje.age }} </h2>
+                    <span id="destination">{{ viaje.destino }}</span>
+                </h1>
+            <h2 class="text-sm title-font text-gray-500 tracking-widest"  id="destination">{{ viaje.age }} </h2>
 
             <!--PROGRESS BAR
             <div class="relative pt-1">
@@ -59,8 +61,13 @@
                 <span class="ml-auto text-gray-500">{{ viaje.f_llegada }}</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500">Costo</span>
-                <span class="ml-auto text-gray-500">{{ viaje.costo }} &#x0024</span>
+                <span class="text-gray-500">Costo </span>
+                {% if viaje.costo == '0' %}
+                    <span class="ml-auto text-gray-500 font-semibold">Por definir</span>
+                {% else %}
+                    <span class="ml-auto text-gray-500">{{ viaje.costo }} &#x0024</span>
+                {% endif %}
+                
             </div>
             <div class="flex border-t border-gray-200 py-2">
                 <span class="text-gray-500">Mercancia</span>
@@ -111,7 +118,11 @@
             </ul>
         </div>  
     </div>
+    <!------------------------CURRENT LOCATION--------------------------------->
+    <span class="text-xs" style="opacity: 0;" id="currlat">23.644</span>
+    <span class="text-xs" style="opacity: 0;" id="currlng">-100.645</span>
     <!--------------------------------------------------------->
+
 
 
     <div class="container px-5 py-0 mx-auto">
@@ -132,9 +143,9 @@
     </section>
 
     <script src="{% static 'js/map_route.js' %}"></script>
-    <script 
+    <script async
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsEgEALRMyIPqumJep9Tmn8Sj39MQIQTI&libraries=places&callback=initMap"> 
-    async
+    
     
     </script>
 

@@ -4,6 +4,9 @@ First version of Flit that actually solves the trust problem
 
 We can use the admin page of the site to update Flit "in the back". 
 
+### Backlog
+
+1. Google Maps route [Link](https://www.youtube.com/watch?v=BkGtNBrOhKU)
 
 
 ### Resources, problems, solutions
@@ -107,5 +110,18 @@ python -c "import sys; print('\n'.join(sys.path))"
 
 [Is there any way to change username field label in user authentication login page?](https://stackoverflow.com/questions/53980603/is-there-any-way-to-change-username-field-label-in-user-authentication-login-pag)
 
+**How to make a callback to Google Maps init in separate files of a web app**
+[Link](https://stackoverflow.com/questions/38627259/how-to-make-a-callback-to-google-maps-init-in-separate-files-of-a-web-app/38627705 )
 
+
+**Django Filtering**
+[Link](https://www.youtube.com/watch?v=nle3u6Ww6Xk)
+[Django Filter library](https://django-filter.readthedocs.io/en/stable/index.html)
+[Filter Queryset Dynamically](How to Filter QuerySets Dynamically)
+
+
+
+### Activar django env with venv
+
+`source {name-of-venv}/bin/activate`
 

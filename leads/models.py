@@ -26,6 +26,9 @@ class Viajes(models.Model):
     TIPO_CANTIDAD = (
         ('Toneladas', 'Toneladas'),
         ('Tarimas', 'Tarimas'),
+        ('Piezas', 'Piezas'),
+        ('Bultos', 'Bultos'),
+        ('Piezas', 'Piezas'),
         ('Otro', 'Otro'),
     )
 
