@@ -7,6 +7,7 @@ We can use the admin page of the site to update Flit "in the back".
 ### Backlog
 
 1. Google Maps route [Link](https://www.youtube.com/watch?v=BkGtNBrOhKU)
+- set lat and longitud for each trip (create fields in the db)
 
 
 ### Resources, problems, solutions

@@ -53,7 +53,8 @@ class Viajes(models.Model):
     id = models.CharField(default=pk_generator, primary_key=True, max_length=10, unique=True)
     origen = models.CharField(max_length=70)
     destino = models.CharField(max_length=70)
-    f_salida = models.DateField(default=date.today)
+    f_creacion = models.DateField(default=date.today)
+    f_recoleccion = models.DateField(default=None, null=True, blank=True)
     f_llegada = models.DateField(default=date.today)
     tipo_embarque = models.CharField(default=None, choices=TIPO_EMBARQUE, max_length=30)
     costo = models.CharField(default='0', max_length=20, blank=True, null=True)
@@ -63,6 +64,7 @@ class Viajes(models.Model):
     status = models.CharField(default='0', choices=STATUS, max_length=30)
     operador = models.ForeignKey("Operador", null=True, blank=True, on_delete=models.SET_NULL)
     linea_transporte = models.ForeignKey("LineaTransporte", null=True, blank=True, on_delete=models.SET_NULL)
+    coords = models.ForeignKey("Coordinates", null=True, blank=True, on_delete=models.CASCADE)
 
     organisation = models.ForeignKey(UserProfile, on_delete=models.CASCADE)                # because the agent can be optional, we have to add this field as a way to filter the leads via the User profile
     agent = models.ForeignKey("Agent", null=True, blank=True, on_delete=models.SET_NULL)
@@ -160,19 +162,28 @@ class Operador(models.Model):
         return f"{self.first_name} {self.last_name} - {self.linea_transporte}"  
 
 class LineaTransporte(models.Model):
-    name = models.CharField(max_length=30)
-    rfc = models.CharField(max_length=30)
-    contacto = models.CharField(max_length=30)    
-    calle = models.CharField(max_length=20)    
-    numero = models.CharField(max_length=20)    
-    municipio = models.CharField(max_length=20)    
-    ciudad = models.CharField(max_length=20)    
-    cp = models.CharField(max_length=20)    
-    estado = models.CharField(max_length=20)    
+    name = models.CharField(max_length=30, null=True, blank=True)
+    rfc = models.CharField(max_length=30, null=True, blank=True)
+    contacto = models.CharField(max_length=30, null=True, blank=True)    
+    calle = models.CharField(max_length=40, null=True, blank=True)    
+    numero = models.CharField(max_length=10, null=True, blank=True)    
+    municipio = models.CharField(max_length=40, null=True, blank=True)    
+    ciudad = models.CharField(max_length=40, null=True, blank=True)    
+    cp = models.CharField(max_length=20, null=True, blank=True)    
+    estado = models.CharField(max_length=30, null=True, blank=True)    
 
 
     def __str__(self):
         return f"{self.name}"
+
+class Coordinates(models.Model):
+    lat = models.FloatField(max_length=40, null=True, blank=True)  
+    lng = models.FloatField(max_length=40, null=True, blank=True)
+    viaje = models.OneToOneField(Viajes,on_delete=models.CASCADE,primary_key=True)  
+
+    def __str__(self):
+        return f"{self.viaje}"  
+
 
 def post_user_created_signal(sender, instance, created, **kwargs):
     if created:

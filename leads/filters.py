@@ -20,14 +20,14 @@ class ViajesFilter(filters.FilterSet):
     def origen_choices(request):
         return 
 
-    f_salida = filters.DateFilter(label="Fecha de Salida", widget=NumberInput(attrs={'type':'date', 'style': 'width:150px'}))
+    f_creacion = filters.DateFilter(label="Fecha de Creación", widget=NumberInput(attrs={'type':'date', 'style': 'width:150px'}))
     status = filters.ChoiceFilter(label="Estatus", choices=CHOICES, method="status_filtering", widget=Select(attrs={'style': 'width:100px'}))
     origen = filters.ModelChoiceFilter(label="Origen", queryset=Viajes.objects.values_list('origen', flat=True).distinct(), widget=Select(attrs={'style': 'width:100px'}))
     destino = filters.ModelChoiceFilter(label="Destino", queryset=Viajes.objects.values_list('destino', flat=True).distinct(), widget=Select(attrs={'style': 'width:100px'}))
         
     class Meta:
         model = Viajes
-        fields = ['f_salida', 'status', 'origen', 'destino']
+        fields = ['f_creacion', 'status', 'origen', 'destino']
 
     def status_filtering(self, queryset, name, value):
         return queryset.filter(status=value)

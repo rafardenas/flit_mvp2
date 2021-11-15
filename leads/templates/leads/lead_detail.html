@@ -43,9 +43,10 @@
             </div>
 
             <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500 font-semibold">Transportista</span>
-                <span class="ml-auto text-gray-500 font-semibold">
+                <span class="text-gray-500 ">Transportista</span>
+                <span class="ml-auto text-gray-500">
                     {% if viaje.operador.linea_transporte %}
+                        {{ viaje.operador.first_name }} {{ viaje.operador.last_name }} —
                         {{ viaje.operador.linea_transporte }}
                     {% else %}
                         Por asignar
@@ -53,11 +54,23 @@
                 </span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
-                <span class="text-gray-500">Fecha de salida</span>
-                <span class="ml-auto text-gray-500">{{ viaje.f_salida }}</span>
+                <span class="text-gray-500">Fecha de creación</span>
+                <span class="ml-auto text-gray-500">{{ viaje.f_creacion }}</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
+                <span class="text-gray-500">Fecha de recolección</span>
+                {% if viaje.f_recoleccion == None %}
+                    <span class="ml-auto text-gray-500 font-semibold">Recolección pendiente</span>
+                {% else %}
+                <span class="ml-auto text-gray-500">{{ viaje.f_recoleccion }}</span>
+                {% endif %}
+            </div>
+            <div class="flex border-t border-gray-200 py-2">
+                {% if viaje.status == '6' %}
+                <span class="text-gray-500">Fecha de llegada</span>
+                {% else %}
                 <span class="text-gray-500">Fecha de llegada estimada</span>
+                {% endif %}
                 <span class="ml-auto text-gray-500">{{ viaje.f_llegada }}</span>
             </div>
             <div class="flex border-t border-gray-200 py-2">
@@ -119,10 +132,9 @@
         </div>  
     </div>
     <!------------------------CURRENT LOCATION--------------------------------->
-    <span class="text-xs" style="opacity: 0;" id="currlat">23.644</span>
-    <span class="text-xs" style="opacity: 0;" id="currlng">-100.645</span>
+    <span class="text-xs" style="opacity: 0;" id="currlat">{{viaje.coords.lat}}</span>
+    <span class="text-xs" style="opacity: 0;" id="currlng">{{viaje.coords.lng}}</span>
     <!--------------------------------------------------------->
-
 
 
     <div class="container px-5 py-0 mx-auto">

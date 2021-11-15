@@ -14,7 +14,7 @@ from django.forms.widgets import NumberInput
 User = get_user_model()
 
 class LeadModelForm(forms.ModelForm):
-    f_salida = forms.DateField(label='Fecha de Salida', initial= date.strftime(date.today(), '%d/%m/%y'),  widget=NumberInput(attrs={'type':'date'})) 
+    f_recoleccion = forms.DateField(label='Fecha de Recolección', initial= date.strftime(date.today(), '%d/%m/%y'),  widget=NumberInput(attrs={'type':'date'})) 
     f_llegada = forms.DateField(label='Fecha de Llegada', initial= date.strftime(date.today(), '%d/%m/%y'), widget=NumberInput(attrs={'type':'date'}))
 
     class Meta:
@@ -22,7 +22,7 @@ class LeadModelForm(forms.ModelForm):
         fields = [
             'origen',
             'destino',
-            'f_salida',
+            'f_recoleccion',
             'f_llegada',    
             'tipo_embarque',
             'mercancia',
